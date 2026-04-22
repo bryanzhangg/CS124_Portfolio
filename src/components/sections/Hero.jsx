@@ -8,16 +8,16 @@ const TILE_GAP       = 3;
 const ROW_GAP        = 8;
 
 const BOARD_DATA = [
-  { value: "BRYAN ZHANG",    rowDelay: 200,  rowOffset: 0 },
-  { value: "AEROSPACE + CS", rowDelay: 600,  rowOffset: 2 },
-  { value: "@ UIUC",         rowDelay: 1000, rowOffset: 3 },
+  { value: "BRYAN ZHANG",    rowDelay: 200,  rowOffset: 0, scrambleDelay: 1000 },
+  { value: "AEROSPACE + CS", rowDelay: 600,  rowOffset: 2, scrambleDelay: 600  },
+  { value: "@ UIUC",         rowDelay: 1000, rowOffset: 3, scrambleDelay: 200  },
 ];
 
 function randomChar() {
   return CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
 }
 
-function SplitFlapChar({ targetChar, delay, flippedAway }) {
+function SplitFlapChar({ targetChar, delay, scrambleDelay, flippedAway }) {
   const [displayChar, setDisplayChar] = useState(randomChar);
   const ticksRef = useRef(0);
 
@@ -41,9 +41,12 @@ function SplitFlapChar({ targetChar, delay, flippedAway }) {
 
   useEffect(() => {
     if (!flippedAway) return;
-    const id = setInterval(() => setDisplayChar(randomChar()), CYCLE_INTERVAL);
-    return () => clearInterval(id);
-  }, [flippedAway]);
+    let intervalId;
+    const timeoutId = setTimeout(() => {
+      intervalId = setInterval(() => setDisplayChar(randomChar()), CYCLE_INTERVAL);
+    }, scrambleDelay);
+    return () => { clearTimeout(timeoutId); clearInterval(intervalId); };
+  }, [flippedAway, scrambleDelay]);
 
   return <span className="flap-char">{displayChar}</span>;
 }
@@ -58,6 +61,7 @@ const CSS = `
     box-sizing: border-box;
     display: flex;
     background: #050505;
+    padding-top: 48px;
   }
 
   .board-frame {
@@ -68,7 +72,6 @@ const CSS = `
     border: 8px solid #1e1e1e;
   }
 
-  .board-header,
   .board-footer {
     display: flex;
     align-items: center;
@@ -82,24 +85,8 @@ const CSS = `
     letter-spacing: 0.18em;
     color: #c8c2b8;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  }
-
-  .board-header {
-    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
-    border-bottom: 8px solid #0a0a0a;
-  }
-
-  .board-footer {
     background: linear-gradient(180deg, #0e0e0e 0%, #141414 100%);
     border-top: 8px solid #0a0a0a;
-  }
-
-  .board-header-icon {
-    display: inline-block;
-    transform: rotate(-45deg);
-    font-size: 1.15em;
-    line-height: 1;
-    opacity: 0.9;
   }
 
   @keyframes bounce-down {
@@ -194,7 +181,6 @@ export default function Hero() {
     return () => { clearTimeout(t); ro.disconnect(); };
   }, []);
 
-  // Trigger immediately on first pixel of scroll
   useEffect(() => {
     const section = sectionRef.current;
     function onScroll() {
@@ -218,11 +204,6 @@ export default function Hero() {
       <style>{CSS}</style>
       <div className="board-frame">
 
-        <div className="board-header">
-          <span className="board-header-icon" aria-hidden="true">✈</span>
-          <span>WELCOME TO MY PORTFOLIO</span>
-        </div>
-
         <div
           className="board-grid"
           ref={gridRef}
@@ -244,6 +225,7 @@ export default function Hero() {
                 key={idx}
                 targetChar={char}
                 delay={textData.rowDelay + colIdx * CHAR_STAGGER}
+                scrambleDelay={textData.scrambleDelay + colIdx * CHAR_STAGGER}
                 flippedAway={flippedAway}
               />
             );
