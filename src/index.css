@@ -1,7 +1,13 @@
 body {
+  margin: 0;
   background: #000;
 }
 
 section {
-  min-height: 100dvh;
+  position: relative;
+  height: 100dvh;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #050505;
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

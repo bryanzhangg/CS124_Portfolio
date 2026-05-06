@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
-  { label: "ABOUT",    id: "about" },
-  { label: "SKILLS",   id: "skills" },
+  { label: "ABOUT", id: "about" },
   { label: "PROJECTS", id: "projects" },
-  { label: "CONTACT",  id: "contact" },
+  { label: "SKILLS", id: "skills" },
+  { label: "CONTACT", id: "contact" },
 ];
 
 const CSS = `
@@ -13,7 +13,6 @@ const CSS = `
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    height: 56px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -24,23 +23,38 @@ const CSS = `
   .site-nav.hero-mode {
     background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
     border-bottom: 8px solid #1e1e1e;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
-    letter-spacing: 0.18em;
+    height: 56px;
+    letter-spacing: 0.14em;
     color: #c8c2b8;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
   .site-nav.default-mode {
-    background: rgba(8, 8, 8, 0.92);
+    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
     border-bottom: 1px solid #1e1e1e;
-    backdrop-filter: blur(10px);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    font-size: 0.78rem;
+    font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.75rem, 1.6vw, 1rem);
+    height: 49px;
     letter-spacing: 0.14em;
-    color: #888;
+    color: #c8c2b8;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero-mode .nav-brand {
+    display: none;
+  }
+
+  .default-mode .nav-brand {
+    color: #bbb;
   }
 
   .nav-icon {
@@ -93,7 +107,10 @@ export default function Navbar() {
     <>
       <style>{CSS}</style>
       <nav className={`site-nav ${isHero ? "hero-mode" : "default-mode"}`}>
-        <span className="nav-icon" aria-hidden="true">✈</span>
+        <div className="nav-left">
+          <span className="nav-icon" aria-hidden="true">✈</span>
+          <span className="nav-brand">BRYAN ZHANG</span>
+        </div>
         <ul className="nav-links">
           {NAV_LINKS.map(({ label, id }) => (
             <li key={id}>
