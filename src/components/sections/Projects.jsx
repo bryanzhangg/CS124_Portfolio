@@ -122,6 +122,41 @@ const CSS = `
 
   .project-card:hover .pc-br { border-color: #707070; }
 
+  /* ── Image placeholder ────────────────────────── */
+  .project-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-card-placeholder-inner {
+    position: relative;
+    padding: 0.5rem 0.9rem;
+  }
+
+  .ph-br {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-style: solid;
+    border-color: #2e2e2e;
+  }
+  .ph-br-tl { top: 0; left: 0;  border-width: 1px 0 0 1px; }
+  .ph-br-tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+  .ph-br-bl { bottom: 0; left: 0;  border-width: 0 0 1px 1px; }
+  .ph-br-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+  .project-card-placeholder-text {
+    font-family: 'B612 Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: #383838;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
   .project-card-caption {
     font-size: 0.68rem;
     font-weight: 500;

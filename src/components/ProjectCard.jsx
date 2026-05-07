@@ -10,8 +10,20 @@ export default function ProjectCard({ project }) {
       <span className="pc-br pc-br-bl" />
       <span className="pc-br pc-br-br" />
       <div className="project-card-image">
-        {/* TODO: swap placeholder for <img src={image} alt={title} /> once image is ready */}
-        {image && <img src={image} alt={title} />}
+        {image
+          ? <img src={image} alt={title} />
+          : (
+            <div className="project-card-placeholder">
+              <div className="project-card-placeholder-inner">
+                <span className="ph-br ph-br-tl" />
+                <span className="ph-br ph-br-tr" />
+                <span className="ph-br ph-br-bl" />
+                <span className="ph-br ph-br-br" />
+                <span className="project-card-placeholder-text">IMAGE COMING SOON</span>
+              </div>
+            </div>
+          )
+        }
       </div>
       <div className="project-card-body">
         <h3 className="project-card-title">{title}</h3>

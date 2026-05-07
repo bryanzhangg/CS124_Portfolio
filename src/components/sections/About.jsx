@@ -134,8 +134,17 @@ const CSS = `
 
   .about-photo-frame {
     flex: 1;
-    background: #111; /* placeholder bg until image is dropped in */
+    position: relative;
+    background: #111;
     overflow: hidden;
+  }
+
+  .about-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    pointer-events: none;
   }
 
   /* TODO: replace with <img src="..." alt="Bryan Zhang" /> */
@@ -231,7 +240,7 @@ export default function About() {
             <span className="aph-br aph-br-bl" />
             <span className="aph-br aph-br-br" />
             <div className="about-photo-frame">
-              {/* TODO: <img src="/assets/photo.jpg" alt="Bryan Zhang" /> */}
+              {<img src="/assets/about/portfolio_headshot.jpg" alt="Bryan Zhang" />}
             </div>
           </div>
 
