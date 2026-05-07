@@ -12,7 +12,7 @@ const CSS = `
     height: 50dvh;
     display: flex;
     flex-direction: column;
-    padding: 3rem 8rem 2.5rem;
+    padding: 3rem 9rem 2.5rem;
   }
 
   /* ── Header (matches Projects / Skills) ───────── */
@@ -22,7 +22,7 @@ const CSS = `
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #333;
+    color: #484848;
     margin-bottom: 0.5rem;
   }
 
@@ -31,7 +31,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    background: linear-gradient(to right, #666 0%, #2a2a2a 100%);
+    background: linear-gradient(to right, #7a7a7a 0%, #3a3a3a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -104,6 +104,21 @@ const CSS = `
 
   .contact-tile:hover .contact-tile-label { color: #555; }
   .contact-tile:hover .contact-tile-value { color: #f0e8d0; }
+
+  @media (max-width: 768px) {
+    #contact {
+      padding: 2.5rem 1.5rem;
+      height: auto;
+    }
+    .contact-tiles {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    .contact-tile {
+      flex: 0 0 auto;
+    }
+  }
 `;
 
 export default function Contact() {
@@ -113,7 +128,7 @@ export default function Contact() {
       <section id="contact">
         <ShootingStars />
 
-        <span className="contact-eyebrow">Get In Touch</span>
+        <span className="contact-eyebrow">Let's Build Together</span>
         <p className="contact-label">Contact</p>
         <hr className="contact-divider" />
 

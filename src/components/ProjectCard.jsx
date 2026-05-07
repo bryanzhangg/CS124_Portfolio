@@ -5,6 +5,10 @@ export default function ProjectCard({ project }) {
 
   return (
     <Link to={`/projects/${slug}`} className="project-card">
+      <span className="pc-br pc-br-tl" />
+      <span className="pc-br pc-br-tr" />
+      <span className="pc-br pc-br-bl" />
+      <span className="pc-br pc-br-br" />
       <div className="project-card-image">
         {/* TODO: swap placeholder for <img src={image} alt={title} /> once image is ready */}
         {image && <img src={image} alt={title} />}

@@ -7,7 +7,7 @@ const CSS = `
     box-sizing: border-box;
     display: flex;
     align-items: stretch;
-    padding: 4rem 8rem;
+    padding: 4rem 9rem;
     will-change: opacity, transform;
   }
 
@@ -48,17 +48,24 @@ const CSS = `
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #333;
+    color: #484848;
   }
 
   .about-heading {
-    /* TODO: fill in name / tagline text */
     font-size: clamp(2.4rem, 4.5vw, 4.5rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     color: #f0ece4;
     margin: 0;
     line-height: 1.05;
+    text-shadow:
+       6px 2px 8px rgba(255, 210, 0, 0.55),
+      -6px -2px 8px rgba(30, 100, 255, 0.55);
+    transition: text-shadow 0.15s ease-out;
+  }
+
+  .about-heading:hover {
+    text-shadow: none;
   }
 
   .about-sub {
@@ -108,7 +115,22 @@ const CSS = `
     flex: 0 0 clamp(220px, 36%, 540px);
     display: flex;
     flex-direction: column;
+    position: relative;
   }
+
+  .aph-br {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-style: solid;
+    border-color: #585858;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .aph-br-tl { top: -6px; left: -6px; border-width: 1.5px 0 0 1.5px; }
+  .aph-br-tr { top: -6px; right: -6px; border-width: 1.5px 1.5px 0 0; }
+  .aph-br-bl { bottom: -6px; left: -6px; border-width: 0 0 1.5px 1.5px; }
+  .aph-br-br { bottom: -6px; right: -6px; border-width: 0 1.5px 1.5px 0; }
 
   .about-photo-frame {
     flex: 1;
@@ -122,6 +144,26 @@ const CSS = `
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  @media (max-width: 768px) {
+    .about-section {
+      padding: 3rem 1.5rem;
+      height: auto;
+      align-items: flex-start;
+    }
+    .about-inner {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .about-photo-col {
+      flex: 0 0 auto;
+      width: 100%;
+      height: 220px;
+    }
+    .aph-br {
+      display: none;
+    }
   }
 `;
 
@@ -164,18 +206,19 @@ export default function About() {
             <hr className="about-divider" />
 
             {/* TODO: 2–4 sentence bio */}
-            <p className="about-bio">Hi, I'm Bryan! I'm a freshman at the University of Illinois Urbana-Champaign studying Aerospace Engineering with a minor in Computer Science. 
+            <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! I'm a freshman at the University of Illinois Urbana-Champaign studying <span style={{color: "#e0d8cc"}}>Aerospace Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span>. 
               I hope to combine engineering, software, and business to build products that are both cool and impactful. 
-              Namely, I'm particularly passionate about autonomy, advanced air mobility, and sustainable aviation.</p>
+              Namely, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>autonomy, advanced air mobility, and sustainable aviation</span>.</p>
             
             <p className="about-bio">On campus, I build and test avionics equipment for an active roll-controlled rocket with Liquid Rocketry. 
-              I've also worked extensively with a Sequoia-backed startup to help them build an LLM data extraction and formatting pipeline as part of CUBE Consulting.
+              I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an LLM data extraction and formatting pipeline as part of CUBE Consulting.
             </p>
 
             {/* TODO: keyword tags — languages, tools, interests */}
             <div className="about-tags">
               <span className="about-tag">CAD</span>
               <span className="about-tag">PROGRAMMING</span>
+              <span className="about-tag">ENGINEERING</span>
               <span className="about-tag">AI</span>
               <span className="about-tag">CONSULTING</span>
             </div>
@@ -183,6 +226,10 @@ export default function About() {
 
           {/* ── Right: photo ─────────────────────────── */}
           <div className="about-photo-col">
+            <span className="aph-br aph-br-tl" />
+            <span className="aph-br aph-br-tr" />
+            <span className="aph-br aph-br-bl" />
+            <span className="aph-br aph-br-br" />
             <div className="about-photo-frame">
               {/* TODO: <img src="/assets/photo.jpg" alt="Bryan Zhang" /> */}
             </div>

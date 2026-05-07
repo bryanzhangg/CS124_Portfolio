@@ -8,7 +8,7 @@ const CSS = `
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 3rem 8rem 2.5rem;
+    padding: 3rem 9rem 2.5rem;
   }
 
   /* ── Section inner (above stars) ─────────────── */
@@ -28,7 +28,7 @@ const CSS = `
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #333;
+    color: #484848;
     margin-bottom: 0.5rem;
   }
 
@@ -38,7 +38,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    background: linear-gradient(to right, #666 0%, #2a2a2a 100%);
+    background: linear-gradient(to right, #7a7a7a 0%, #3a3a3a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -63,6 +63,7 @@ const CSS = `
 
   /* ── Card ─────────────────────────────────────── */
   .project-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -104,12 +105,50 @@ const CSS = `
     letter-spacing: -0.02em;
   }
 
+  .pc-br {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-style: solid;
+    border-color: #484848;
+    z-index: 2;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+  }
+  .pc-br-tl { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; }
+  .pc-br-tr { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; }
+  .pc-br-bl { bottom: 0; left: 0; border-width: 0 0 1.5px 1.5px; }
+  .pc-br-br { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; }
+
+  .project-card:hover .pc-br { border-color: #707070; }
+
   .project-card-caption {
     font-size: 0.68rem;
     font-weight: 500;
     color: #7b7878;
     margin: 0;
     letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    #projects {
+      padding: 2.5rem 1.5rem;
+      height: auto;
+      overflow: visible;
+    }
+    .projects-inner {
+      overflow: visible;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      overflow: visible;
+      gap: 1.5rem;
+    }
+    .project-card-image {
+      flex: 0 0 auto;
+      aspect-ratio: 16 / 9;
+    }
   }
 `;
 

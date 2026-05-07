@@ -12,7 +12,7 @@ const CATEGORIES = [
   },
   {
     label: "Interests",
-    skills: ["Aerospace", "Autonomy", "AI / ML", "Adv. Air Mobility", "Consulting"],
+    skills: ["Aerospace", "Autonomy", "AI / ML", "Adv. Air Mobility", "Robotics", "Electronics", "Consulting"],
   },
 ];
 
@@ -20,7 +20,7 @@ const CSS = `
   #skills {
     display: flex;
     flex-direction: column;
-    padding: 3rem 8rem;
+    padding: 3rem 9rem;
   }
 
   /* ── Scan line (plays once on entry) ─────────── */
@@ -47,7 +47,7 @@ const CSS = `
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #333;
+    color: #484848;
     margin-bottom: 0.5rem;
   }
 
@@ -56,7 +56,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    background: linear-gradient(to right, #666 0%, #2a2a2a 100%);
+    background: linear-gradient(to right, #7a7a7a 0%, #3a3a3a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -198,6 +198,42 @@ const CSS = `
 
   .skill-target.locked .skill-name { opacity: 1; }
   .skill-target.locked:hover .skill-name { color: #f0e8d0; }
+
+  @media (max-width: 768px) {
+    #skills {
+      padding: 2.5rem 1.5rem;
+      height: auto;
+      overflow: visible;
+    }
+    .hud-inner {
+      overflow: visible;
+    }
+    .hud-grid {
+      flex-direction: column;
+      overflow: visible;
+      gap: 0;
+    }
+    .hud-category {
+      flex: 0 0 auto;
+      padding: 0 0 1.5rem 0;
+      border-right: none;
+      border-bottom: 1px solid #1e1e1e;
+      margin-bottom: 1.5rem;
+    }
+    .hud-category:first-child { padding-left: 0; }
+    .hud-category:last-child {
+      border-right: none;
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .hud-skills-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0.4rem;
+    }
+  }
 `;
 
 function SkillTarget({ name, delay, visible }) {

@@ -47,15 +47,40 @@ const CSS = `
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
 
   .hero-mode .nav-brand {
     display: none;
   }
 
-  .default-mode .nav-brand {
-    color: #bbb;
+  .nav-brand {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
   }
+
+  .nav-brand-first { color: #c8c2b8; font-weight: 700; }
+  .nav-brand-sep   { color: #c8c2b8; font-weight: 500; }
+  .nav-brand-last  { color: #c8c2b8; font-weight: 700; }
+
+  @keyframes nav-glitch {
+    0%   { text-shadow: none;                                                    transform: none; }
+    18%  { text-shadow:  3px 0 rgba(0,220,255,0.9), -3px 0 rgba(255,0,80,0.9);  transform: translateX(-3px); }
+    36%  { text-shadow: -3px 0 rgba(0,220,255,0.75), 3px 0 rgba(255,0,80,0.75); transform: translateX( 3px); }
+    54%  { text-shadow:  2px 0 rgba(255,0,80,0.65);                              transform: translateX(-2px); }
+    72%  { text-shadow: -1px 0 rgba(0,220,255,0.5);                              transform: translateX( 1px); }
+    88%  { text-shadow:  1px 0 rgba(0,220,255,0.2);                              transform: none; }
+    100% { text-shadow: none;                                                    transform: none; }
+  }
+
+  .nav-left:hover .nav-brand-first,
+  .nav-left:hover .nav-brand-sep,
+  .nav-left:hover .nav-brand-last { animation: nav-glitch 0.38s step-start forwards; }
 
   .nav-icon {
     display: inline-block;
@@ -80,6 +105,16 @@ const CSS = `
   }
 
   .nav-links a:hover { opacity: 0.55; }
+
+  @media (max-width: 768px) {
+    .site-nav.hero-mode,
+    .site-nav.default-mode {
+      padding: 0 1rem;
+    }
+    .nav-links {
+      gap: 1.2rem;
+    }
+  }
 `;
 
 export default function Navbar() {
@@ -107,10 +142,23 @@ export default function Navbar() {
     <>
       <style>{CSS}</style>
       <nav className={`site-nav ${isHero ? "hero-mode" : "default-mode"}`}>
-        <div className="nav-left">
+        <a
+          className="nav-left"
+          href="/"
+          onClick={(e) => {
+            if (onHome) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <span className="nav-icon" aria-hidden="true">✈</span>
-          <span className="nav-brand">BRYAN ZHANG</span>
-        </div>
+          <span className="nav-brand">
+            <span className="nav-brand-first">BRYAN</span>
+            <span className="nav-brand-sep">_</span>
+            <span className="nav-brand-last">ZHANG</span>
+          </span>
+        </a>
         <ul className="nav-links">
           {NAV_LINKS.map(({ label, id }) => (
             <li key={id}>

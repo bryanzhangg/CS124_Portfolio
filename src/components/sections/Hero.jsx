@@ -235,6 +235,17 @@ const CSS = `
     position: absolute;
     pointer-events: none;
   }
+
+  @media (max-width: 768px) {
+    .flap-probe {
+      width: clamp(26px, 5.5vw, 88px);
+      height: clamp(36px, 7.5vw, 120px);
+    }
+    .board-footer {
+      font-size: 0.7rem;
+      padding: 0.7rem 1rem;
+    }
+  }
 `;
 
 export default function Hero() {
