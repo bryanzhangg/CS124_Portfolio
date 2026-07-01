@@ -80,36 +80,6 @@ const CSS = `
     overflow: hidden;
   }
 
-  /* ── Status bar ───────────────────────────────── */
-  .hud-status {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: 'B612 Mono', 'Courier New', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    color: #484848;
-    text-transform: uppercase;
-  }
-
-  .hud-dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #3a6b3a;
-    box-shadow: 0 0 6px rgba(80,180,80,0.35);
-    margin-right: 0.6rem;
-    vertical-align: middle;
-  }
-
-  .hud-divider {
-    height: 1px;
-    background: #1e1e1e;
-    border: none;
-    margin: 0;
-  }
-
   /* ── Category columns ─────────────────────────── */
   .hud-grid {
     flex: 1;
@@ -298,16 +268,6 @@ export default function Skills() {
         <hr className="skills-divider" />
 
         <div className="hud-inner">
-
-          <div className="hud-status">
-            <span>
-              <span className="hud-dot" />
-              Status: Systems Online
-            </span>
-            <span>Skills Matrix</span>
-          </div>
-
-          <hr className="hud-divider" />
 
           <div className="hud-grid">
             {CATEGORIES.map(({ label, skills }, catIdx) => (
