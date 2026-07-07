@@ -210,7 +210,7 @@ export default function About() {
             <h2 className="about-heading">Bryan Zhang</h2>
 
             {/* TODO: role or one-liner (e.g. "Aerospace Engineering · CS @ UIUC") */}
-            <p className="about-sub">AEROSPACE ENGINEER / CONSULTANT / BUILDER</p>
+            <p className="about-sub">ENGINEER / CONSULTANT / BUILDER</p>
 
             <hr className="about-divider" />
 
