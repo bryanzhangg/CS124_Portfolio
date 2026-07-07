@@ -9,8 +9,7 @@ const ROW_GAP = 14;
 
 const BOARD_DATA = [
   { value: "BRYAN ZHANG", rowDelay: 200, rowOffset: 0, scrambleDelay: 1000 },
-  { value: "AEROSPACE + CS", rowDelay: 600, rowOffset: 2, scrambleDelay: 600 },
-  { value: "@ UIUC", rowDelay: 1000, rowOffset: 3, scrambleDelay: 200 },
+  { value: "EE + CS @ UIUC", rowDelay: 600, rowOffset: 2, scrambleDelay: 600 },
 ];
 
 function randomChar() {
