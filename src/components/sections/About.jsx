@@ -215,7 +215,7 @@ export default function About() {
             <hr className="about-divider" />
 
             {/* TODO: 2–4 sentence bio */}
-            <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! I'm a freshman at the University of Illinois Urbana-Champaign studying <span style={{color: "#e0d8cc"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span>. 
+            <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! I'm a student at the University of Illinois Urbana-Champaign studying <span style={{color: "#e0d8cc"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span>. 
               I hope to combine engineering, software, and business to build products that are both cool and impactful. 
               Namely, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>autonomy, advanced air mobility, and sustainable aviation</span>.</p>
             
