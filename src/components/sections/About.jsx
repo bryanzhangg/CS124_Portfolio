@@ -216,11 +216,12 @@ export default function About() {
 
             {/* TODO: 2–4 sentence bio */}
             <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! I'm a student at the University of Illinois Urbana-Champaign studying <span style={{color: "#e0d8cc"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span>. 
-              I hope to combine engineering, software, and business to build products that are both cool and impactful. 
-              Namely, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>autonomy, advanced air mobility, and sustainable aviation</span>.</p>
+              I expect to graduate in <span style={{color: "#e0d8cc"}}>May 2029</span> at the latest. I hope to combine engineering, programming, design, and business to build products that are both innovative and impactful. 
+              Currently, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>embedded systems, robotics, and general electronics</span>.
+              Some specific industries I'm interested in include <span style={{color: "#e0d8cc"}}>autonomous vehicles, semiconductors, and advanced air mobility.</span></p>
             
             <p className="about-bio">On campus, I build and test avionics equipment for an active roll-controlled rocket with Liquid Rocketry. 
-              I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an LLM data extraction and formatting pipeline as part of CUBE Consulting.
+              I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator as part of CUBE Consulting.
             </p>
 
             {/* TODO: keyword tags — languages, tools, interests */}
