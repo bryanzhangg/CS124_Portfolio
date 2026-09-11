@@ -220,7 +220,7 @@ export default function About() {
               Currently, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>embedded, power, semiconductors, and robotics</span>.
               Some specific industries I'm interested in include <span style={{color: "#e0d8cc"}}>autonomous vehicles, semiconductors, and advanced air mobility.</span></p>
             
-            <p className="about-bio">On campus, I build and test avionics equipment for an active roll-controlled rocket with Liquid Rocketry. 
+            <p className="about-bio">On campus, I've built and tested avionics equipment for an active roll-controlled rocket with Liquid Rocketry. Now, I'm doing circuit design and software on our FSAE team, Illini Electric Motorsports.
               I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator as part of CUBE Consulting.
             </p>
 
