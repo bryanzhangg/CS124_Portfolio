@@ -229,8 +229,6 @@ export default function About() {
               <span className="about-tag">CAD</span>
               <span className="about-tag">PROGRAMMING</span>
               <span className="about-tag">ENGINEERING</span>
-              <span className="about-tag">AI</span>
-              <span className="about-tag">CONSULTING</span>
             </div>
           </div>
 
