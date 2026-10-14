@@ -1,4 +1,5 @@
 // Add photo files to public/assets/projects/, then list them in gallery:
+// Use plain paths: ["/assets/projects/photo.png"], or objects for captions and alt text:
 // { src: "/assets/projects/photo.png", alt: "Photo description", caption: "Optional caption" }
 // image is the header; an empty gallery displays the header image as a fallback.
 const projects = [

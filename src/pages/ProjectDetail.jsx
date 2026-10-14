@@ -36,7 +36,9 @@ export default function ProjectDetail() {
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
   if (!project) return <ErrorPage project />;
   const { title, image, description, tags = [], links = {}, gallery = [] } = project;
-  const photos = gallery.length ? gallery : image ? [{ src: image, alt: title }] : [];
+  const photos = gallery.length
+    ? gallery.map((photo) => typeof photo === "string" ? { src: photo } : photo)
+    : image ? [{ src: image, alt: title }] : [];
   return (
     <main className="detail-page">
       <header className="detail-hero">
