@@ -7,7 +7,6 @@ export default function Experience() {
       <div className="experience-header">
         <span className="experience-eyebrow">The path so far</span>
         <h2 id="experience-title">Experience</h2>
-        <p>Where I’ve worked, built, and learned.</p>
       </div>
 
       <ol className="experience-timeline">
