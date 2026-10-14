@@ -9,8 +9,12 @@ function Gallery({ photos, title }) {
   if (!photos.length) return null;
   function move(direction) {
     const el = track.current;
-    const step = el.children[0].getBoundingClientRect().width + 24;
-    el.scrollBy({ left: direction * step, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    const left = el.getBoundingClientRect().left;
+    const positions = Array.from(el.children, slide => slide.getBoundingClientRect().left - left + el.scrollLeft);
+    const target = direction > 0
+      ? positions.find(position => position > el.scrollLeft + 2) ?? el.scrollWidth - el.clientWidth
+      : positions.findLast(position => position < el.scrollLeft - 2) ?? 0;
+    el.scrollTo({ left: target, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   }
   return (
     <div className="detail-gallery" role="region" aria-label={`${title} gallery`}>
