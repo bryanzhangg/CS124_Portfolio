@@ -220,6 +220,12 @@ export default function About() {
             <p className="about-bio">On campus, I've built and tested avionics equipment for an active roll-controlled rocket with Liquid Rocketry. Now, I'm doing circuit design and software on our FSAE team, Illini Electric Motorsports.
               I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator.
             </p>
+
+            <div className="about-tags">
+              <span className="about-tag">ENGINEERING</span>
+              <span className="about-tag">PROGRAMMING</span>
+              <span className="about-tag">US-CITIZEN</span>
+            </div>
           </div>
 
           {/* ── Right: photo ─────────────────────────── */}
