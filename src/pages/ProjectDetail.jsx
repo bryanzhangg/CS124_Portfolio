@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import projects from "../data/projects";
+import ErrorPage from "./ErrorPage";
 
 const CSS = `
   .detail-page {
@@ -113,17 +114,7 @@ export default function ProjectDetail() {
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    return (
-      <>
-        <style>{CSS}</style>
-        <main className="detail-page">
-          <div className="detail-inner">
-            <Link to="/#projects" className="detail-back">← Back to projects</Link>
-            <p style={{ color: "#444" }}>Project not found.</p>
-          </div>
-        </main>
-      </>
-    );
+    return <ErrorPage project />;
   }
 
   const { title, image, description, tags = [], links = {} } = project;

@@ -1,0 +1,13 @@
+.site-footer {
+  padding: 0.9rem 1rem;
+  border-top: 1px solid #1c1c1c;
+  background: #050505;
+  text-align: center;
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #939393;
+}
+
+.site-footer small {
+  font-size: clamp(0.6rem, 2.5vw, 0.7rem);
+  letter-spacing: 0.04em;
+}
