@@ -21,7 +21,7 @@ const experience = [
     period: "Aug. 2025 — Aug. 2026",
     role: "Airframe Avionics Engineer",
     organization: "Liquid Rocketry at Illinois",
-    description: "Contributed end-to-end to the development of our first active roll-controlled rocket, Control Freak's, avionics and controls.",
+    description: "Contributed end-to-end to the avionics and controls  of our first active roll-controlled rocket, Control Freak.",
     highlights: ["Co-developed an embedded driver for a Triple Modular Redundant BMP390 barometer architecture through SPI and STM32", "Designed the avionics bay, owning the battery bay, constrainer, and TeleMega enclosure. Flight validated to 9g axial acceleration"],
     tags: ["KiCAD", "Siemens NX", "STM32", "CLion", "Soldering"],
   },
