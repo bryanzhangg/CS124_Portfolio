@@ -224,7 +224,7 @@ export default function About() {
             <div className="about-tags">
               <span className="about-tag">ENGINEERING</span>
               <span className="about-tag">PROGRAMMING</span>
-              <span className="about-tag">US-CITIZEN</span>
+              <span className="about-tag">U.S. CITIZEN</span>
             </div>
           </div>
 

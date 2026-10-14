@@ -125,7 +125,7 @@ export default function Contact() {
       <section id="contact">
         <ShootingStars />
 
-        <span className="contact-eyebrow">Let's Build Together</span>
+        <span className="contact-eyebrow">Let's Get in Touch</span>
         <p className="contact-label">Contact</p>
         <hr className="contact-divider" />
 
