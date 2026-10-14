@@ -92,7 +92,7 @@
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  padding: 7px;
+  padding: 0;
 }
 
 .experience-node img {
