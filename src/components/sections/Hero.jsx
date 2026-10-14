@@ -325,7 +325,7 @@ export default function Hero() {
         </div>
 
         <div className="board-footer">
-          <span>SCROLL FOR MORE</span>
+          <span>SCROLL</span>
         </div>
 
       </div>
