@@ -8,7 +8,7 @@ const projects = [
     caption: "Airbus A220-300 fully modeled in Siemens NX.",
     image: "/assets/projects/project-a220.png",
     gallery: [],
-    description: "I created a 1:1 dimensioned 3D model of the Airbus A220-300 (with the SWISS livery) in Siemens NX, mostly using surface modeling tools. To do so, I found publicly available dimensions, calculated some missing measurements, and utilized raster images and Airbus-provided blueprints to create an accurate scale. Airfoil coordinates were pulled from databases containing NACA profiles. Finally, decals were used to construct the aircraft's livery.", // TODO: full project description for detail page
+    description: "I created a 1:1 dimensioned 3D model of the Airbus A220-300 (with the SWISS livery) in Siemens NX. The entire assembly, which comprises of approximately six files, was constructed using NX Surface Modeling tools. All external features of the aircraft were fully modeled, and the entire N1 shaft of the turbofans can rotate. Some dimensions for this project were pulled directly from public Airbus resources, whilst others were reconstructed from template raster images and software tools like Kinovea. The airfoils used on the A220 series are proprietary, but I found similar NACA airfoils and pulled them from databases. Then, I used Excel to extract their coordinates, scaled them to their true dimensions, and imported them into NX. Finally, decals were used to construct the aircraft's livery.", // TODO: full project description for detail page
     tags: ["Siemens NX", "Excel", "Design", "Research"], // TODO: ["Python", "React", ...]
     links: {}, // TODO: { github: "...", demo: "..." }
   },
