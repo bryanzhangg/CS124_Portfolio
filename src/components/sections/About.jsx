@@ -209,19 +209,16 @@ export default function About() {
             {/* TODO: your name or a short headline */}
             <h2 className="about-heading">Bryan Zhang</h2>
 
-            {/* TODO: role or one-liner (e.g. "Aerospace Engineering · CS @ UIUC") */}
-            <p className="about-sub">ENGINEER / CONSULTANT / BUILDER</p>
-
             <hr className="about-divider" />
 
             {/* TODO: 2–4 sentence bio */}
-            <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! I'm a student at the University of Illinois Urbana-Champaign studying <span style={{color: "#e0d8cc"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span>. 
-              I expect to graduate in <span style={{color: "#e0d8cc"}}>May 2029</span> at the latest. I hope to combine engineering, programming, design, and business to build products that are both innovative and impactful. 
-              Currently, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>embedded, power, semiconductors, and robotics</span>.
-              Some specific industries I'm interested in include <span style={{color: "#e0d8cc"}}>autonomous vehicles, semiconductors, and advanced air mobility.</span></p>
+            <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! Formerly an Aerospace Engineer, I now study <span style={{color: "#e0d8cc"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span> at the University of Illinois Urbana-Champaign. 
+              I hope to combine engineering, programming, design, and business to build products that are both innovative and impactful. 
+              Currently, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>embedded, autonomy, robotics, and semiconductors.</span>
+              Some specific industries I'm currently interested in include <span style={{color: "#e0d8cc"}}>autonomous vehicles, aerospace, and defense.</span></p>
             
             <p className="about-bio">On campus, I've built and tested avionics equipment for an active roll-controlled rocket with Liquid Rocketry. Now, I'm doing circuit design and software on our FSAE team, Illini Electric Motorsports.
-              I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator as part of CUBE Consulting.
+              I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator.
             </p>
 
             {/* TODO: keyword tags — languages, tools, interests */}
