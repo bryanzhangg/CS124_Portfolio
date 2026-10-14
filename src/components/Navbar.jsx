@@ -26,11 +26,13 @@ const CSS = `
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
+    background: linear-gradient(180deg, rgba(20,20,20,0.65), rgba(14,14,14,0.45));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
   }
 
   .site-nav.hero-mode {
-    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
-    border-bottom: 8px solid #1e1e1e;
+    border-bottom: 8px solid rgba(255,255,255,0.06);
     font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
@@ -41,8 +43,7 @@ const CSS = `
   }
 
   .site-nav.default-mode {
-    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
-    border-bottom: 1px solid #1e1e1e;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
@@ -148,8 +149,10 @@ const CSS = `
     position: fixed;
     top: 49px;
     left: 0; right: 0;
-    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
-    border-bottom: 1px solid #1e1e1e;
+    background: linear-gradient(180deg, rgba(20,20,20,0.85), rgba(14,14,14,0.75));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     padding: 1.2rem 1rem 1.4rem;
     z-index: 99;
     opacity: 0;
