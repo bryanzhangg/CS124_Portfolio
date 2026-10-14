@@ -10,13 +10,15 @@ export default function Experience() {
       </div>
 
       <ol className="experience-timeline">
-        {experience.map(({ id, period, role, organization, description, highlights = [], tags = [] }, index) => (
+        {experience.map(({ id, period, role, organization, logo, description, highlights = [], tags = [] }, index) => (
           <li key={id} className="experience-entry">
             <div className="experience-date">
               <span className="experience-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               <span>{period}</span>
             </div>
-            <span className="experience-node" aria-hidden="true" />
+            <span className="experience-node" aria-hidden="true">
+              {logo && <img src={logo} alt="" loading="lazy" />}
+            </span>
             <article className="experience-card">
               <span className="experience-organization">{organization}</span>
               <h3>{role}</h3>
