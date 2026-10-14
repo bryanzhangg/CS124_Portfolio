@@ -4,15 +4,15 @@ import ShootingStars from "../ShootingStars";
 const CATEGORIES = [
   {
     label: "Languages",
-    skills: ["Python", "Java", "C / C++", "JavaScript", "HTML / CSS", "Arduino"],
+    skills: ["Python", "Java", "C", "C++", "JavaScript", "HTML", "CSS"],
   },
   {
     label: "Tools",
-    skills: ["Siemens NX", "Git", "KiCAD", "React", "Firebase", "Android Studio", "Gemini API"],
+    skills: ["Siemens NX", "Fusion 360", "KiCAD", "Altium Designer", "LTSpice", "Git", "STM32", "RTOS"],
   },
   {
     label: "Interests",
-    skills: ["Aerospace", "Autonomy", "AI / ML", "Adv. Air Mobility", "Robotics", "Electronics", "Consulting"],
+    skills: ["Embedded", "Avionics", "Autonomy", "Robotics", "Aerospace", "Power Electronics", "Semiconductors"],
   },
 ];
 
