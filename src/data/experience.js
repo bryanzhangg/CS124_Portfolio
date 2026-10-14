@@ -6,9 +6,9 @@ const experience = [
   {
     id: "incoming-experience",
     period: "May 2027 — Aug. 2027",
-    role: "Incoming Firmware Engineering Intern",
-    organization: "Milwaukee Tool",
-    logo: "/assets/experience/milwaukeetool-com-logo.png",
+    role: "Incoming Field Applications Engineering Intern",
+    organization: "Texas Instruments",
+    logo: "/assets/experience/ti_logo.jpg",
   },
   {
     id: "experience-1",
