@@ -31,10 +31,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    background: linear-gradient(to right, #7a7a7a 0%, #3a3a3a 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #e0d8cc;
   }
 
   .contact-divider {
