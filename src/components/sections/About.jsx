@@ -7,7 +7,7 @@ const CSS = `
     box-sizing: border-box;
     display: flex;
     align-items: stretch;
-    padding: 4rem 9rem;
+    padding: 4rem 9rem 2.5rem;
     will-change: opacity, transform;
   }
 
@@ -157,7 +157,7 @@ const CSS = `
 
   @media (max-width: 768px) {
     .about-section {
-      padding: 3rem 1.5rem;
+      padding: 3rem 1.5rem 2.5rem;
       height: auto;
       align-items: flex-start;
     }
