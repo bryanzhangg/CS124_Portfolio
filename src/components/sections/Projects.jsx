@@ -9,6 +9,8 @@ const CSS = `
     display: flex;
     flex-direction: column;
     padding: 3rem 9rem 2.5rem;
+    height: auto;
+    overflow: visible;
   }
 
   /* ── Section inner (above stars) ─────────────── */
@@ -18,7 +20,7 @@ const CSS = `
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
   }
 
   /* ── Section header ───────────────────────────── */
@@ -52,10 +54,19 @@ const CSS = `
   .projects-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
-    overflow: hidden;
+    overflow: visible;
+  }
+
+  /* Half-width cards; center an unpaired final card without resizing it. */
+  .projects-grid > .project-card {
+    grid-column: span 2;
+    min-width: 0;
+  }
+
+  .projects-grid > .project-card:last-child:nth-child(odd) {
+    grid-column: 2 / span 2;
   }
 
   /* ── Card ─────────────────────────────────────── */
@@ -76,12 +87,16 @@ const CSS = `
   }
 
   .project-card-image {
-    flex: 1;
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 9;
+    position: relative;
     background: #111; /* placeholder until image is set */
     overflow: hidden;
   }
 
   .project-card-image img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -176,6 +191,10 @@ const CSS = `
       grid-template-rows: auto;
       overflow: visible;
       gap: 1.5rem;
+    }
+    .projects-grid > .project-card,
+    .projects-grid > .project-card:last-child:nth-child(odd) {
+      grid-column: 1;
     }
     .project-card-image {
       flex: 0 0 auto;

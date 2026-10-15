@@ -19,7 +19,7 @@ export default function ProjectCard({ project }) {
                 <span className="ph-br ph-br-tr" />
                 <span className="ph-br ph-br-bl" />
                 <span className="ph-br ph-br-br" />
-                <span className="project-card-placeholder-text">IMAGE COMING SOON</span>
+                <span className="project-card-placeholder-text">NO IMAGE AVAILABLE</span>
               </div>
             </div>
           )

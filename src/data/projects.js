@@ -10,7 +10,7 @@ const projects = [
     image: "/assets/projects/project-a220.png",
     gallery: ["/assets/projects/project-a220.png", "/assets/projects/a220_render_1.png", "/assets/projects/a220_render_2.png"],
     description: "I created a 1:1 dimensioned 3D model of the Airbus A220-300 (with the SWISS livery) in Siemens NX. The entire assembly, which comprises of approximately six files, was constructed using NX Surface Modeling tools. All external features of the aircraft were fully modeled, and the entire N1 shaft of the turbofans can rotate. Some dimensions for this project were pulled directly from public Airbus resources, whilst others were reconstructed from template raster images and software tools like Kinovea. The airfoils used on the A220 series are proprietary, but I found similar NACA airfoils and pulled them from databases. Then, I used Excel to extract their coordinates, scaled them to their true dimensions, and imported them into NX. Finally, decals were used to construct the aircraft's livery.", // TODO: full project description for detail page
-    tags: ["Siemens NX", "Excel", "Design", "Research"], // TODO: ["Python", "React", ...]
+    tags: ["Siemens NX", "Surface Modeling", "Assemblies", "Excel", "Design", "Research"], // TODO: ["Python", "React", ...]
     links: {}, // TODO: { github: "...", demo: "..." }
   },
   {
@@ -20,8 +20,18 @@ const projects = [
     image: "/assets/projects/project-avbay.png",
     gallery: [],
     description: "I owned the design of the battery bay, the battery constrainer, and the TeleMega PCB enclosure, while I significantly contributed to the design of other components on the avionics bay. The battery bay was designed to hold our batteries while providing easy accessibility for servicing and replacement. However, the relatively open designed allowed for vibrations, so a small ring, the battery constrainer, was added to the assembly. The TeleMega enclosure was also designed to provide adequate protection to the board while providing cooling channels, screw holes, and airflow for the onboard barometer. The entire structure was designed in Siemens NX to strict dimensioning and tolerance stackup standards. The components were manufactured through PLA 3D printing, stress testing each print and redesigning using the observed behavior. The components were assembled together using a combination of screws and epoxy/loctite. I soldered various jumper wires and cables together, then helped integrate the full avionics bay into our upper stage and nosecone.",
-    tags: ["Siemens NX", "3D Printing", "Testing", "Soldering"],
+    tags: ["Siemens NX", "3D Printing", "Physical Assembly", "Testing", "Soldering"],
     links: {github: "https://github.com/liquid-rocketry-illinois/HAL-1-HW.git"},
+  },
+  {
+    slug: "project-bmp390",
+    title: "Embedded Driver for Triple Modular Redundant BMP390 Barometer on STM32",
+    caption: "Co-developed the embedded driver for the triple modular redundant BMP390 barometer array on our rocket.",
+    image: null,
+    gallery: [],
+    description: "I co-developed the embedded driver for the barometer array that flew on Liquid Rocketry's active roll-controlled rocket. The barometer array is triple modular redundant, meaning we have three distinct BMP390 sensors communicating via the same SPI line. Upon each update, a voting algorithm will discard the outlier reading from one sensor and average the other two readings to produce safe, accurate, and fault-tolerant data. Within the driver itself, the header file defines the struct we store our data in (height, temperature, and pressure), provides the sensor indexes for our three sensors, and provides the interface for SPI communication. The implementation file assigns the sensor indexes to CS pins, toggles built-in sensor settings and measurements on or off, handles initialization errors, and implements SPI communication within the Init() function. The Update() function calls for sensor data, sensor status, and performs required unit conversions before sending the new readings via SPI.",
+    tags: ["C", "C++", "STM32", "CLion", "Git"],
+    links: {github: "https://github.com/liquid-rocketry-illinois/HAL-1-SW.git"},
   },
   {
     slug: "project-habitual",
