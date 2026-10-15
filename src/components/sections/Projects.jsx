@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ProjectCard from "../ProjectCard";
 import projects from "../../data/projects";
 import ShootingStars from "../ShootingStars";
@@ -177,6 +178,29 @@ const CSS = `
     letter-spacing: 0.1em;
   }
 
+  .projects-more {
+    align-self: center;
+    margin-top: 1.75rem;
+    padding: 0.8rem 1.4rem;
+    background: #0d0d0d;
+    border: 1px solid #484848;
+    color: #e0d8cc;
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .projects-more:hover { border-color: #a19d96; background: #161616; }
+  .projects-more:focus-visible { outline: 2px solid #e0d8cc; outline-offset: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-more { transition: none; }
+  }
+
   @media (max-width: 768px) {
     #projects {
       padding: 2.5rem 1.5rem;
@@ -204,6 +228,9 @@ const CSS = `
 `;
 
 export default function Projects() {
+  const [expanded, setExpanded] = useState(false);
+  const visibleProjects = expanded ? projects : projects.slice(0, 4);
+
   return (
     <>
       <style>{CSS}</style>
@@ -215,11 +242,21 @@ export default function Projects() {
           <p className="projects-label">Projects</p>
           <hr className="projects-divider" />
 
-          <div className="projects-grid">
-            {projects.map((project) => (
+          <div className="projects-grid" id="projects-grid">
+            {visibleProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
+          {projects.length > 4 && (
+            <button
+              className="projects-more"
+              aria-expanded={expanded}
+              aria-controls="projects-grid"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "View less" : "View more"}
+            </button>
+          )}
         </div>
 
       </section>
