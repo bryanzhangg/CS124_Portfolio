@@ -184,7 +184,7 @@ const CSS = `
     font-family: 'B612 Mono', 'Courier New', monospace;
     font-size: clamp(1.25rem, 5.5vw, 5rem);
     font-weight: 500;
-    color: #f0e8d0;
+    color: #f0ede5;
   }
 
   .flap-top-half {

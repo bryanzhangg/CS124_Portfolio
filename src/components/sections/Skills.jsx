@@ -55,7 +55,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    color: #e0d8cc;
+    color: #e2dfd8;
   }
 
   .skills-divider {
@@ -157,13 +157,13 @@ const CSS = `
     font-size: 0.78rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #c8c2b8;
+    color: #c8c5bf;
     opacity: 0;
     transition: opacity 0.2s ease 0.22s, color 0.15s ease;
   }
 
   .skill-target.locked .skill-name { opacity: 1; }
-  .skill-target.locked:hover .skill-name { color: #f0e8d0; }
+  .skill-target.locked:hover .skill-name { color: #f0ede5; }
 
   @media (max-width: 768px) {
     #skills {

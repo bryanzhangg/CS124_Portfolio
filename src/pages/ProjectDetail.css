@@ -1,27 +1,27 @@
-﻿.detail-page { --detail-gutter: clamp(1.5rem, 6vw, 7rem); min-height: 100dvh; background: #050505; padding-bottom: 4rem; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.detail-page { --detail-gutter: clamp(1.5rem, 6vw, 7rem); min-height: 100dvh; background: #050505; padding-bottom: 4rem; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 .detail-hero { position: relative; height: 85svh; min-height: 520px; max-height: 1000px; overflow: hidden; display: flex; align-items: flex-end; background: radial-gradient(ellipse at 60% 25%, #242424, #050505 75%); }
 .detail-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .detail-blur { position: absolute; inset: 0; pointer-events: none; }
 .detail-blur-soft { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); -webkit-mask-image: linear-gradient(transparent 75%, #000 95%); mask-image: linear-gradient(transparent 75%, #000 95%); }
 .detail-blur-deep { -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); -webkit-mask-image: linear-gradient(transparent 85%, #000 100%); mask-image: linear-gradient(transparent 85%, #000 100%); }
 .detail-hero-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, #0005, transparent 30%, #05050540 55%, #050505e6 85%, #050505 100%); }
-.detail-back { position: absolute; top: 5.5rem; left: var(--detail-gutter); color: #e0d8cc; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.7rem 1rem; background: #05050580; border: 1px solid #ffffff30; }
+.detail-back { position: absolute; top: 5.5rem; left: var(--detail-gutter); color: #e2dfd8; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.7rem 1rem; background: #05050580; border: 1px solid #ffffff30; }
 .detail-hero-title { position: relative; padding: 3rem var(--detail-gutter) 2.5rem; width: 100%; box-sizing: border-box; }
 .detail-eyebrow { color: #b1aaa0; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; }
-.detail-hero-title h1 { max-width: 1200px; font-size: clamp(2.3rem, 5.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.04em; margin: 0.85rem 0 0; color: #e0d8cc; overflow-wrap: anywhere; }
+.detail-hero-title h1 { max-width: 1200px; font-size: clamp(2.3rem, 5.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.04em; margin: 0.85rem 0 0; color: #e2dfd8; overflow-wrap: anywhere; }
 .detail-content { padding: 0 var(--detail-gutter); }
 .detail-tags { list-style: none; padding: 0; margin: 0 0 1.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .detail-tags li { font-size: 0.7rem; letter-spacing: 0.08em; color: #a19d96; padding: 0.4rem 0.75rem; border: 1px solid #303030; }
 .detail-description { font-size: clamp(0.95rem, 1.3vw, 1.1rem); color: #aaa; line-height: 1.9; margin: 0; white-space: pre-line; }
 .detail-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
-.detail-links a { color: #e0d8cc; border: 1px solid #383838; padding: 0.65rem 1rem; text-decoration: none; font-size: 0.78rem; }
+.detail-links a { color: #e2dfd8; border: 1px solid #383838; padding: 0.65rem 1rem; text-decoration: none; font-size: 0.78rem; }
 .detail-links a:hover, .detail-back:hover { border-color: #a19d96; }
-.detail-page a:focus-visible, .detail-page button:focus-visible, .detail-gallery-track:focus-visible { outline: 2px solid #e0d8cc; outline-offset: 4px; }
+.detail-page a:focus-visible, .detail-page button:focus-visible, .detail-gallery-track:focus-visible { outline: 2px solid #e2dfd8; outline-offset: 4px; }
 .detail-gallery { margin-top: 4rem; padding: 0 var(--detail-gutter); }
 .detail-gallery-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid #242424; margin-bottom: 1.5rem; }
-.detail-gallery-heading h2 { color: #e0d8cc; font-size: clamp(1.6rem, 3vw, 2.5rem); letter-spacing: -0.03em; margin: 0.5rem 0 0; }
+.detail-gallery-heading h2 { color: #e2dfd8; font-size: clamp(1.6rem, 3vw, 2.5rem); letter-spacing: -0.03em; margin: 0.5rem 0 0; }
 .detail-gallery-controls { display: flex; gap: 0.65rem; }
-.detail-gallery-controls button { width: 42px; height: 42px; border: 1px solid #383838; background: #111; color: #e0d8cc; font-size: 1.2rem; cursor: pointer; }
+.detail-gallery-controls button { width: 42px; height: 42px; border: 1px solid #383838; background: #111; color: #e2dfd8; font-size: 1.2rem; cursor: pointer; }
 .detail-gallery-controls button:hover { border-color: #a19d96; }
 .detail-gallery-track { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #555 #111; padding-bottom: 1rem; }
 .detail-gallery-track figure { flex: 0 0 auto; min-width: 0; margin: 0; scroll-snap-align: start; }

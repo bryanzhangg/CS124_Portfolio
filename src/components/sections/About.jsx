@@ -56,7 +56,7 @@ const CSS = `
     font-size: clamp(2.4rem, 4.5vw, 4.5rem);
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: #f0ece4;
+    color: #f0eeea;
     margin: 0;
     line-height: 1.05;
     text-shadow:
@@ -210,13 +210,13 @@ export default function About() {
             <hr className="about-divider" />
 
             {/* TODO: 2–4 sentence bio */}
-            <p className="about-bio">Hi, I'm <span style={{color: "#e0d8cc"}}>Bryan</span>! Formerly an Aerospace Engineer, I now study <span style={{color: "#e0d8cc"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e0d8cc"}}>Computer Science</span> at the <span style={{color: "#e0d8cc"}}>University of Illinois Urbana-Champaign. </span> 
+            <p className="about-bio">Hi, I'm <span style={{color: "#e2dfd8"}}>Bryan</span>! Formerly an Aerospace Engineer, I now study <span style={{color: "#e2dfd8"}}>Electrical Engineering</span> with a minor in <span style={{color: "#e2dfd8"}}>Computer Science</span> at the <span style={{color: "#e2dfd8"}}>University of Illinois Urbana-Champaign. </span> 
               I hope to combine engineering, programming, design, and business to build products that are both innovative and impactful. 
-              Currently, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>embedded, autonomy, robotics, and semiconductors. </span>
-              Some specific industries I'm currently interested in include <span style={{color: "#e0d8cc"}}>autonomous vehicles, aerospace, and defense.</span></p>
+              Currently, I'm particularly passionate about <span style={{color: "#e2dfd8"}}>embedded, autonomy, robotics, and semiconductors. </span>
+              Some specific industries I'm currently interested in include <span style={{color: "#e2dfd8"}}>autonomous vehicles, aerospace, and defense.</span></p>
             
             <p className="about-bio">On campus, I've built and tested avionics equipment for an active roll-controlled rocket with Liquid Rocketry. Now, I'm doing circuit design and software on our FSAE team, Illini Electric Motorsports.
-              I've also worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator.
+              I've also worked extensively with a <span style={{color: "#e2dfd8"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator.
             </p>
 
             <div className="about-tags">

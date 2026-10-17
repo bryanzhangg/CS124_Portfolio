@@ -40,7 +40,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    color: #e0d8cc;
+    color: #e2dfd8;
   }
 
   .projects-divider {
@@ -116,7 +116,7 @@ const CSS = `
   .project-card-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #e0d8cc;
+    color: #e2dfd8;
     margin: 0 0 0.35rem;
     letter-spacing: -0.02em;
   }
@@ -187,7 +187,7 @@ const CSS = `
     padding: 0.8rem 1.4rem;
     background: #0d0d0d;
     border: 1px solid #484848;
-    color: #e0d8cc;
+    color: #e2dfd8;
     font: inherit;
     font-size: 0.72rem;
     font-weight: 600;
@@ -198,7 +198,7 @@ const CSS = `
   }
 
   .projects-more:hover { border-color: #a19d96; background: #161616; }
-  .projects-more:focus-visible { outline: 2px solid #e0d8cc; outline-offset: 4px; }
+  .projects-more:focus-visible { outline: 2px solid #e2dfd8; outline-offset: 4px; }
 
   @media (prefers-reduced-motion: reduce) {
     .projects-more { transition: none; }
