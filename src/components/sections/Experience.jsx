@@ -40,17 +40,18 @@ export default function Experience() {
             </article>
           </li>
         ))}
-        {!expanded && experience.length > 3 && (
-          <li className="experience-expand-entry">
+        {experience.length > 3 && (
+          <li className={`experience-expand-entry${expanded ? " is-expanded" : ""}`}>
             <button
               className="experience-expand"
-              aria-label="View all experiences"
+              aria-label={expanded ? "View less" : "View all experiences"}
+              title={expanded ? "View less" : "View more"}
               aria-expanded={expanded}
               aria-controls="experience-timeline"
-              onClick={() => setExpanded(true)}
+              onClick={() => setExpanded(value => !value)}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                <path d="M12 4v16m-6-6 6 6 6-6" />
+                <path d={expanded ? "M12 20V4m-6 6 6-6 6 6" : "M12 4v16m-6-6 6 6 6-6"} />
               </svg>
             </button>
           </li>
