@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import HeroSlideshow from "../HeroSlideshow";
 
 const CYCLE_INTERVAL = 60;
 const SPIN_COUNT = 10;
@@ -295,7 +296,7 @@ export default function Hero() {
     <section id="hero" ref={sectionRef}>
       <style>{CSS}</style>
       <div className="board-frame">
-
+        <HeroSlideshow>
         <div
           className="board-grid"
           ref={gridRef}
@@ -324,9 +325,7 @@ export default function Hero() {
           })}
         </div>
 
-        <div className="board-footer">
-          <span>SCROLL</span>
-        </div>
+        </HeroSlideshow>
 
       </div>
     </section>
