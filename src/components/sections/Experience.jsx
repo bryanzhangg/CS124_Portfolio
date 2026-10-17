@@ -1,7 +1,11 @@
+import { useState } from "react";
 import experience from "../../data/experience";
 import "./Experience.css";
 
 export default function Experience() {
+  const [expanded, setExpanded] = useState(false);
+  const visibleExperience = expanded ? experience : experience.slice(0, 3);
+
   return (
     <section id="experience" className="experience-section" aria-labelledby="experience-title">
       <div className="experience-header">
@@ -9,8 +13,8 @@ export default function Experience() {
         <h2 id="experience-title">Experience</h2>
       </div>
 
-      <ol className="experience-timeline">
-        {experience.map(({ id, period, role, organization, logo, description, highlights = [], tags = [] }, index) => (
+      <ol className="experience-timeline" id="experience-timeline">
+        {visibleExperience.map(({ id, period, role, organization, logo, description, highlights = [], tags = [] }, index) => (
           <li key={id} className="experience-entry">
             <div className="experience-date">
               <span className="experience-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
@@ -36,6 +40,21 @@ export default function Experience() {
             </article>
           </li>
         ))}
+        {!expanded && experience.length > 3 && (
+          <li className="experience-expand-entry">
+            <button
+              className="experience-expand"
+              aria-label="View all experiences"
+              aria-expanded={expanded}
+              aria-controls="experience-timeline"
+              onClick={() => setExpanded(true)}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M12 4v16m-6-6 6 6 6-6" />
+              </svg>
+            </button>
+          </li>
+        )}
       </ol>
     </section>
   );
