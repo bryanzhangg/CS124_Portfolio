@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 
 const CSS = `
   .about-section {
@@ -7,7 +6,6 @@ const CSS = `
     display: flex;
     align-items: stretch;
     padding: 4rem 9rem 2.5rem;
-    will-change: opacity, transform;
   }
 
   /* Board shadow bleeds down onto the About section */
@@ -176,28 +174,10 @@ const CSS = `
 `;
 
 export default function About() {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    function update() {
-      const vh = window.innerHeight;
-      const p = Math.min(1, Math.max(0, (window.scrollY - vh * 0.70) / (vh * 0.25)));
-      el.style.opacity = p;
-      el.style.transform = `translateY(${Math.round(28 * (1 - p))}px)`;
-    }
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, []);
-
   return (
     <>
       <style>{CSS}</style>
-      <section id="about" className="about-section" ref={ref}>
+      <section id="about" className="about-section">
         <div className="about-inner">
 
           {/* ── Left: text ───────────────────────────── */}
