@@ -32,7 +32,7 @@ const CSS = `
   }
 
   .site-nav.hero-mode {
-    border-bottom: 8px solid rgba(255,255,255,0.06);
+    border-bottom: 0;
     font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
