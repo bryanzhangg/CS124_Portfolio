@@ -149,7 +149,8 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
             <div className="hero-sweep"><div className="hero-sweep-dark" /><div className="hero-sweep-light" /></div>
           </div>
         )}
-      <div className={`hero-slide-footer ${current === 0 ? "board-footer" : "hero-slide-footer-floating"}`}>
+      {current === 0 && <div className="board-footer hero-intro-footer" aria-hidden="true" />}
+      <div className="hero-slide-footer hero-slide-footer-floating">
         <div className="hero-slide-progress" role="group" aria-label="Choose a hero slide">
           <i className="hero-progress-corner top-left" aria-hidden="true" />
           <i className="hero-progress-corner top-right" aria-hidden="true" />

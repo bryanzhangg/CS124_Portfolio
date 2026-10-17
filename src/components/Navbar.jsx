@@ -26,8 +26,8 @@ const CSS = `
 
   .site-nav.hero-mode {
     border-bottom: 0;
-    font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
-    font-weight: 700;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 56px;
     letter-spacing: 0.14em;
@@ -37,8 +37,8 @@ const CSS = `
 
   .site-nav.default-mode {
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Inter', Inter, Helvetica, Arial, sans-serif;
-    font-weight: 700;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 49px;
     letter-spacing: 0.14em;
@@ -66,9 +66,9 @@ const CSS = `
     align-items: center;
   }
 
-  .nav-brand-first { color: #c8c2b8; font-weight: 700; }
-  .nav-brand-sep   { color: #c8c2b8; font-weight: 500; }
-  .nav-brand-last  { color: #c8c2b8; font-weight: 700; }
+  .nav-brand-first { color: #c8c2b8; font-weight: 600; }
+  .nav-brand-sep   { color: #c8c2b8; font-weight: 600; }
+  .nav-brand-last  { color: #c8c2b8; font-weight: 600; }
 
   @keyframes nav-glitch {
     0%   { text-shadow: none;                                                    transform: none; }
@@ -85,8 +85,8 @@ const CSS = `
   .nav-left:hover .nav-brand-last { animation: nav-glitch 0.38s step-start forwards; }
 
   .nav-initials {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 800;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
     font-size: 1.65rem;
     letter-spacing: -0.07em;
     line-height: 1;
@@ -154,7 +154,7 @@ const CSS = `
     transform: translateY(-6px);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
     font-family: 'Inter', Helvetica, Arial, sans-serif;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.14em;
     color: #c8c2b8;
   }
