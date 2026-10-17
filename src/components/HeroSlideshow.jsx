@@ -13,7 +13,6 @@ export default function HeroSlideshow({ children }) {
   const [ready, setReady] = useState({ intro: true });
   const [failed, setFailed] = useState({});
   const [introDone, setIntroDone] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
   const [reduced, setReduced] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [saveData] = useState(() => Boolean(navigator.connection?.saveData));
@@ -50,7 +49,7 @@ export default function HeroSlideshow({ children }) {
   }
 
   useEffect(() => {
-    if (!introDone || paused || reduced || !visible) return;
+    if (!introDone || reduced || !visible) return;
     const timer = setTimeout(() => {
       for (let step = 1; step < slides.length; step++) {
         const next = (current + step) % slides.length;
@@ -62,12 +61,12 @@ export default function HeroSlideshow({ children }) {
       }
     }, slides[current].duration || 7000);
     return () => clearTimeout(timer);
-  }, [current, introDone, paused, reduced, visible, ready, failed]);
+  }, [current, introDone, reduced, visible, ready, failed]);
 
   useEffect(() => {
     Object.entries(videos.current).forEach(([id, video]) => {
       if (!video) return;
-      if (id === slides[current].id && visible && !paused && !reduced) {
+      if (id === slides[current].id && visible && !reduced) {
         video.play().catch(() => {
           setFailed(value => ({ ...value, [id]: true }));
           setCurrent(value => slides[value].id === id ? 0 : value);
@@ -76,7 +75,7 @@ export default function HeroSlideshow({ children }) {
         video.pause();
       }
     });
-  }, [current, visible, paused, reduced, introDone]);
+  }, [current, visible, reduced, introDone]);
 
   return (
     <>
@@ -120,7 +119,6 @@ export default function HeroSlideshow({ children }) {
         })}
       </div>
       <div className="board-footer hero-slide-footer">
-        <span className="hero-scroll-label">SCROLL</span>
         <div className="hero-slide-progress" role="group" aria-label="Choose a hero slide">
           <i className="hero-progress-corner top-left" aria-hidden="true" />
           <i className="hero-progress-corner top-right" aria-hidden="true" />
@@ -130,9 +128,8 @@ export default function HeroSlideshow({ children }) {
             className={`hero-slide-dot${index === current ? " active" : ""}`}
             aria-label={`Show ${slide.label}`} aria-current={index === current ? "true" : undefined}
             disabled={!ready[slide.id] || failed[slide.id]}
-            onClick={() => { select(index); setPaused(true); }} />)}
+            onClick={() => select(index)} />)}
         </div>
-        {!reduced && slides.length > 1 && <button className="hero-slide-pause" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play slideshow" : "Pause slideshow"} aria-pressed={paused}>{paused ? "PLAY" : "PAUSE"}</button>}
       </div>
     </>
   );

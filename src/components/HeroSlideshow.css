@@ -26,7 +26,6 @@
 .hero-slide-dot.active { background: #888; transform: scale(1.5); }
 .hero-slide-dot:hover:enabled { background: #a19d96; }
 .hero-slide-dot:disabled { opacity: 0.35; cursor: default; }
-.hero-slide-pause { color: #a19d96; font: inherit; font-size: 0.6rem; letter-spacing: 0.12em; background: none; border: 0; padding: 0.5rem; cursor: pointer; }
 .hero-slide-footer button:focus-visible { outline: 2px solid #e0d8cc; outline-offset: 5px; }
 @media (prefers-reduced-motion: reduce) {
   .hero-slide.is-wiping, .hero-wipe-edge { animation: none; }

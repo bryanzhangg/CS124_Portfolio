@@ -117,27 +117,6 @@ const CSS = `
     border-top: 8px solid #0a0a0a;
   }
 
-  @keyframes flow-down {
-    0%   { background-position: 50% -50%; }
-    100% { background-position: 50% 150%; }
-  }
-
-  .board-footer span {
-    background: linear-gradient(
-      to bottom,
-      #8a8480 0%,
-      #c8c2b8 30%,
-      #ede9e3 50%,
-      #c8c2b8 70%,
-      #8a8480 100%
-    );
-    background-size: 100% 300%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: flow-down 3s ease-in-out infinite;
-  }
-
   .board-grid {
     flex: 1;
     overflow: hidden;
