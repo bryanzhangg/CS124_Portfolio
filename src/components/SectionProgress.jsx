@@ -74,6 +74,12 @@ const CSS = `
     background: #484848;
   }
 
+  .section-progress.on-light .sp-frame::before { background: #a19a8e; }
+  .section-progress.on-light .sp-br { border-color: #726b60; }
+  .section-progress.on-light .sp-dot { background: #938b7e; }
+  .section-progress.on-light .sp-dot.active { background: #242424; }
+  .section-progress.on-light .sp-dot:hover:not(.active) { background: #514d46; }
+
   @media (max-width: 768px) {
     .section-progress {
       display: none;
@@ -83,10 +89,13 @@ const CSS = `
 
 export default function SectionProgress() {
   const [active, setActive] = useState("hero");
+  const [onLight, setOnLight] = useState(false);
 
   useEffect(() => {
     function update() {
       const mid = window.innerHeight / 2;
+      const experience = document.getElementById("experience")?.getBoundingClientRect();
+      setOnLight(!!experience && experience.top <= mid && experience.bottom > mid);
       let closest = "hero";
       let closestDist = Infinity;
       for (const { id } of SECTIONS) {
@@ -114,7 +123,7 @@ export default function SectionProgress() {
   return (
     <>
       <style>{CSS}</style>
-      <div className="section-progress" aria-hidden="true" style={{ opacity: active === "hero" ? 0 : 1, pointerEvents: active === "hero" ? "none" : "auto", transition: "opacity 0.4s ease" }}>
+      <div className={`section-progress${onLight ? " on-light" : ""}`} aria-hidden="true" style={{ opacity: active === "hero" ? 0 : 1, pointerEvents: active === "hero" ? "none" : "auto", transition: "opacity 0.4s ease" }}>
         <div className="sp-frame">
           <span className="sp-br sp-br-tl" />
           <span className="sp-br sp-br-tr" />

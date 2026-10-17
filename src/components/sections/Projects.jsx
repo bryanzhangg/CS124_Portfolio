@@ -75,8 +75,8 @@ const CSS = `
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    background: #0d0d0d;
-    border: 1px solid #1a1a1a;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
     overflow: hidden;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -106,7 +106,11 @@ const CSS = `
   .project-card-body {
     flex-shrink: 0;
     padding: 0.75rem 1rem;
-    border-top: 1px solid #1c1c1c;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(180deg, rgba(24,24,24,0.82), rgba(18,18,18,0.72));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
   .project-card-title {
