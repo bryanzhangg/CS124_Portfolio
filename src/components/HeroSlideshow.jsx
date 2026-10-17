@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import heroSlides from "../data/heroSlides";
 import "./HeroSlideshow.css";
 
@@ -7,6 +7,8 @@ const slides = [{ id: "intro", type: "intro", label: "Introduction", duration: 7
 export default function HeroSlideshow({ children, introDuration = 2300 }) {
   const stage = useRef(null);
   const videos = useRef({});
+  const clock = useRef({ slide: null, remaining: 0 });
+  const firstIntro = useRef(true);
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState(null);
   const [ready, setReady] = useState({ intro: true });
@@ -48,20 +50,43 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
     }
   }
 
-  useEffect(() => {
-    if (!introDone || reduced || paused || !visible || previous !== null) return;
-    const timer = setTimeout(() => {
-      for (let step = 1; step < slides.length; step++) {
-        const next = (current + step) % slides.length;
-        if (ready[slides[next].id] && !failed[slides[next].id]) {
-          setPrevious(current);
-          setCurrent(next);
-          break;
-        }
+  // Read current readiness without resetting the dwell timer as media loads.
+  const advance = useEffectEvent(() => {
+    for (let step = 1; step < slides.length; step++) {
+      const next = (current + step) % slides.length;
+      if (ready[slides[next].id] && !failed[slides[next].id]) {
+        setPrevious(current);
+        setCurrent(next);
+        return true;
       }
-    }, current === 0 ? 1000 : slides[current].duration || 7000);
-    return () => clearTimeout(timer);
-  }, [current, previous, introDone, reduced, paused, visible, ready, failed]);
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (!introDone || previous !== null) return;
+    if (clock.current.slide !== current) {
+      clock.current = {
+        slide: current,
+        remaining: current === 0 && firstIntro.current ? 1000 : slides[current].duration || 7000,
+      };
+      firstIntro.current = false;
+    }
+    if (reduced || paused || !visible) return;
+
+    const started = performance.now();
+    let timer;
+    function finish() {
+      // If nothing else is ready, retain the current slide and retry without
+      // giving it another full dwell period.
+      if (!advance()) timer = setTimeout(finish, 250);
+    }
+    timer = setTimeout(finish, clock.current.remaining);
+    return () => {
+      clearTimeout(timer);
+      clock.current.remaining = Math.max(0, clock.current.remaining - (performance.now() - started));
+    };
+  }, [current, previous, introDone, reduced, paused, visible]);
 
   useEffect(() => {
     Object.entries(videos.current).forEach(([id, video]) => {
