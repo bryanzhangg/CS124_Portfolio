@@ -122,7 +122,7 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
           </div>
         )}
       </div>
-      <div className="board-footer hero-slide-footer">
+      <div className={`hero-slide-footer ${current === 0 ? "board-footer" : "hero-slide-footer-floating"}`}>
         <div className="hero-slide-progress" role="group" aria-label="Choose a hero slide">
           <i className="hero-progress-corner top-left" aria-hidden="true" />
           <i className="hero-progress-corner top-right" aria-hidden="true" />
