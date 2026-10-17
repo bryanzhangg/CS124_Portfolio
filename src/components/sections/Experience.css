@@ -112,6 +112,7 @@
 .experience-card {
   position: relative;
   min-width: 0;
+  overflow-wrap: anywhere;
   padding: 1.5rem 1.75rem;
   border: 1px solid #242424;
   background: #0d0d0d;
@@ -169,6 +170,9 @@
 }
 
 .experience-tags li {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -178,17 +182,18 @@
 }
 
 @media (max-width: 1100px) {
-  .experience-section { padding: 3rem 4rem 2.5rem; --timeline-date-width: 9rem; --timeline-gap: 2.5rem; }
+  .experience-timeline { width: 100%; }
+  .experience-timeline::before { left: 24px; top: 24px; bottom: 0; }
+  .experience-entry { grid-template-columns: minmax(0, 1fr); padding-left: 4.25rem; padding-bottom: 2rem; }
+  .experience-node { left: 24px; top: 0; }
+  .experience-date { min-width: 0; flex-direction: row; flex-wrap: wrap; gap: 0.75rem; padding-top: 0; margin-bottom: 0.8rem; overflow-wrap: anywhere; }
 }
 
 @media (max-width: 768px) {
   .experience-section { padding: 2.5rem 1.5rem; min-height: auto; }
-  .experience-timeline { width: calc(85% + 4.25rem * 0.15); }
   .experience-header { margin-bottom: 2rem; }
-  .experience-timeline::before { left: 24px; top: 24px; bottom: 0; }
-  .experience-entry { grid-template-columns: minmax(0, 1fr); padding-left: 4.25rem; padding-bottom: 2rem; }
-  .experience-node { left: 24px; top: 0; }
-  .experience-date { flex-direction: row; flex-wrap: wrap; gap: 0.75rem; padding-top: 0; margin-bottom: 0.8rem; }
+  .experience-entry { padding-left: 0; }
+  .experience-date { min-height: var(--timeline-logo-size); margin-left: 4.25rem; align-items: center; margin-bottom: 1rem; }
   .experience-card { padding: 1.25rem; }
 }
 
