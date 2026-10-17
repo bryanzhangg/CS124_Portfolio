@@ -24,6 +24,8 @@ export default function Experience() {
               {logo && <img src={logo} alt="" loading="lazy" />}
             </span>
             <article className="experience-card">
+              <span className="experience-corner experience-corner-tr" aria-hidden="true" />
+              <span className="experience-corner experience-corner-bl" aria-hidden="true" />
               <span className="experience-organization">{organization}</span>
               <h3>{role}</h3>
               {description && <p className="experience-description">{description}</p>}
