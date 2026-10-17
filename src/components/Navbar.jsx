@@ -22,9 +22,6 @@ const CSS = `
     background: linear-gradient(180deg, rgba(20,20,20,0.65), rgba(14,14,14,0.45));
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
-  }
-
-  .site-nav.hero-mode {
     border-bottom: 0;
     font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 600;
@@ -33,16 +30,6 @@ const CSS = `
     letter-spacing: 0.14em;
     color: #c8c2b8;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  }
-
-  .site-nav.default-mode {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    font-size: clamp(0.75rem, 1.6vw, 1rem);
-    height: 49px;
-    letter-spacing: 0.14em;
-    color: #c8c2b8;
   }
 
   .nav-left {
@@ -91,6 +78,18 @@ const CSS = `
     letter-spacing: -0.07em;
     line-height: 1;
     color: #f0e8d0;
+    display: inline-flex;
+    align-items: baseline;
+    transform: skewX(-8deg);
+  }
+
+  .nav-initials-separator {
+    display: inline-block;
+    width: 0.4em;
+    height: 0.08em;
+    margin: 0 0.06em;
+    background: currentColor;
+    transform: translateY(0.08em);
   }
 
   /* ── Desktop nav links ─────────────────────────── */
@@ -141,7 +140,7 @@ const CSS = `
   .nav-mobile-menu {
     display: none;
     position: fixed;
-    top: 49px;
+    top: 56px;
     left: 0; right: 0;
     background: linear-gradient(180deg, rgba(20,20,20,0.85), rgba(14,14,14,0.75));
     -webkit-backdrop-filter: blur(14px);
@@ -252,7 +251,7 @@ export default function Navbar() {
             setMenuOpen(false);
           }}
         >
-          {isHero ? <span className="nav-initials" aria-hidden="true">B_Z</span> : <span className="nav-brand">
+          {isHero ? <span className="nav-initials" aria-hidden="true">B<span className="nav-initials-separator" />Z</span> : <span className="nav-brand">
             <span className="nav-brand-first">BRYAN</span>
             <span className="nav-brand-sep">_</span>
             <span className="nav-brand-last">ZHANG</span>

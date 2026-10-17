@@ -3,7 +3,7 @@
 .hero-slide.is-previous { visibility: visible; z-index: 1; }
 .hero-slide.is-active { visibility: visible; z-index: 2; }
 .hero-slide > .board-grid { width: 100%; height: 100%; }
-.hero-slide.is-intro { box-sizing: border-box; padding-top: 56px; padding-bottom: 64px; }
+.hero-slide.is-intro { box-sizing: border-box; padding-top: 56px; }
 .hero-slide.is-intro > .board-grid { border: 8px solid #1e1e1e; }
 .hero-slide > img, .hero-slide > video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-slide-caption { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: clamp(1.5rem, 5vw, 5rem); box-sizing: border-box; pointer-events: none; background: linear-gradient(transparent 65%, #000b); }
@@ -12,10 +12,10 @@
 .hero-slide-copy h2 { font-family: inherit; font-size: clamp(2rem, 5vw, 5rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin: 0.75rem 0; }
 .hero-slide-copy p { font-family: inherit; font-size: clamp(0.9rem, 1.5vw, 1.15rem); line-height: 1.6; margin: 0; max-width: 650px; }
 /* Reveal behind the trailing band as both narrow strips travel right to left. */
-.hero-slide.is-wiping { animation: hero-covered-swap 700ms cubic-bezier(0.45, 0, 0.55, 1) both; }
+.hero-slide.is-wiping { animation: hero-covered-swap 550ms cubic-bezier(0.8, 0, 0.2, 1) both; }
 @keyframes hero-covered-swap { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
-.hero-transition { position: absolute; inset: 56px 0 0; z-index: 8; pointer-events: none; animation: hero-band-travel 700ms cubic-bezier(0.45, 0, 0.55, 1) both; will-change: transform; }
-.hero-sweep { position: absolute; top: 0; bottom: 0; left: -7.5%; width: 15%; display: flex; animation: hero-band-width 700ms cubic-bezier(0.45, 0, 0.55, 1) both; will-change: transform; }
+.hero-transition { position: absolute; inset: 56px 0 0; z-index: 8; pointer-events: none; animation: hero-band-travel 550ms cubic-bezier(0.8, 0, 0.2, 1) both; will-change: transform; }
+.hero-sweep { position: absolute; top: 0; bottom: 0; left: -7.5%; width: 15%; display: flex; animation: hero-band-width 550ms ease-in-out both; will-change: transform; }
 .hero-sweep-dark { flex: 1; background: #050505; }
 .hero-sweep-light { flex: 1; background: #e0d8cc; }
 @keyframes hero-band-travel { from { transform: translateX(100%); } to { transform: translateX(0); } }
@@ -29,7 +29,6 @@
 .hero-pause { position: absolute; right: 1.5rem; bottom: 1rem; z-index: 7; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid #383838; background: #050505b3; color: #a19d96; cursor: pointer; }
 .hero-pause:hover { border-color: #a19d96; color: #e0d8cc; }
 .hero-pause:focus-visible { outline: 2px solid #e0d8cc; outline-offset: 4px; }
-.hero-intro-footer { position: absolute; bottom: 0; left: 0; right: 0; height: 64px; box-sizing: border-box; z-index: 4; }
 .hero-slide-progress { position: relative; display: flex; align-items: center; gap: 0.9rem; padding: 0.65rem 0.85rem; margin: 0; isolation: isolate; }
 .hero-slide-progress::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #1c1c1c; transform: translateY(-50%); z-index: -1; }
 .hero-progress-corner { position: absolute; width: 8px; height: 8px; border: solid #383838; pointer-events: none; }
