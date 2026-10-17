@@ -9,13 +9,6 @@ const NAV_LINKS = [
   { label: "CONTACT",  id: "contact"  },
 ];
 
-const PlaneSVG = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-    width="1.15em" height="1.15em" aria-hidden="true" style={{ display: "block" }}>
-    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-  </svg>
-);
-
 const CSS = `
   .site-nav {
     position: fixed;
@@ -91,12 +84,13 @@ const CSS = `
   .nav-left:hover .nav-brand-sep,
   .nav-left:hover .nav-brand-last { animation: nav-glitch 0.38s step-start forwards; }
 
-  .nav-icon {
-    display: inline-flex;
-    align-items: center;
-    transform: rotate(45deg);
-    opacity: 0.9;
-    flex-shrink: 0;
+  .nav-initials {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1.65rem;
+    letter-spacing: -0.07em;
+    line-height: 1;
+    color: #f0e8d0;
   }
 
   /* ── Desktop nav links ─────────────────────────── */
@@ -215,11 +209,16 @@ export default function Navbar() {
 
   useEffect(() => {
     function check() {
-      setIsHero(onHome && window.scrollY === 0);
+      const hero = document.getElementById("hero");
+      setIsHero(onHome && !!hero && hero.getBoundingClientRect().bottom > 56);
     }
     check();
     window.addEventListener("scroll", check, { passive: true });
-    return () => window.removeEventListener("scroll", check);
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
   }, [onHome]);
 
   useEffect(() => {
@@ -244,6 +243,7 @@ export default function Navbar() {
         <a
           className="nav-left"
           href="/"
+          aria-label="Bryan Zhang — home"
           onClick={(e) => {
             if (onHome) {
               e.preventDefault();
@@ -252,12 +252,11 @@ export default function Navbar() {
             setMenuOpen(false);
           }}
         >
-          <span className="nav-icon"><PlaneSVG /></span>
-          <span className="nav-brand">
+          {isHero ? <span className="nav-initials" aria-hidden="true">B_Z</span> : <span className="nav-brand">
             <span className="nav-brand-first">BRYAN</span>
             <span className="nav-brand-sep">_</span>
             <span className="nav-brand-last">ZHANG</span>
-          </span>
+          </span>}
         </a>
 
         <ul className="nav-links">
