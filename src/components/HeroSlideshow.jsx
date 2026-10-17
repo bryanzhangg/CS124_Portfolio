@@ -3,9 +3,8 @@ import heroSlides from "../data/heroSlides";
 import "./HeroSlideshow.css";
 
 const slides = [{ id: "intro", type: "intro", label: "Introduction", duration: 7000 }, ...heroSlides];
-const INTRO_SETTLE_MS = 3500;
 
-export default function HeroSlideshow({ children }) {
+export default function HeroSlideshow({ children, introDuration = 2300 }) {
   const stage = useRef(null);
   const videos = useRef({});
   const [current, setCurrent] = useState(0);
@@ -21,9 +20,9 @@ export default function HeroSlideshow({ children }) {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReduced(preference.matches);
     preference.addEventListener("change", update);
-    const timer = setTimeout(() => setIntroDone(true), INTRO_SETTLE_MS);
+    const timer = setTimeout(() => setIntroDone(true), introDuration);
     return () => { clearTimeout(timer); preference.removeEventListener("change", update); };
-  }, []);
+  }, [introDuration]);
 
   useEffect(() => {
     let inView = true;
@@ -35,7 +34,7 @@ export default function HeroSlideshow({ children }) {
   }, []);
 
   function select(index) {
-    if (index === current || !ready[slides[index].id] || failed[slides[index].id]) return;
+    if (previous !== null || index === current || !ready[slides[index].id] || failed[slides[index].id]) return;
     setPrevious(current);
     setCurrent(index);
   }
@@ -49,7 +48,7 @@ export default function HeroSlideshow({ children }) {
   }
 
   useEffect(() => {
-    if (!introDone || reduced || !visible) return;
+    if (!introDone || reduced || !visible || previous !== null) return;
     const timer = setTimeout(() => {
       for (let step = 1; step < slides.length; step++) {
         const next = (current + step) % slides.length;
@@ -59,9 +58,9 @@ export default function HeroSlideshow({ children }) {
           break;
         }
       }
-    }, slides[current].duration || 7000);
+    }, current === 0 ? 1000 : slides[current].duration || 7000);
     return () => clearTimeout(timer);
-  }, [current, introDone, reduced, visible, ready, failed]);
+  }, [current, previous, introDone, reduced, visible, ready, failed]);
 
   useEffect(() => {
     Object.entries(videos.current).forEach(([id, video]) => {
@@ -113,10 +112,15 @@ export default function HeroSlideshow({ children }) {
                   </div>
                 </div>
               )}
-              {active && previous !== null && <div className="hero-wipe-edge" aria-hidden="true" />}
             </div>
           );
         })}
+        {previous !== null && (
+          <div className="hero-transition" aria-hidden="true">
+            <div className="hero-sweep hero-sweep-dark" />
+            <div className="hero-sweep hero-sweep-light" onAnimationEnd={() => setPrevious(null)} />
+          </div>
+        )}
       </div>
       <div className="board-footer hero-slide-footer">
         <div className="hero-slide-progress" role="group" aria-label="Choose a hero slide">

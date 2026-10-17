@@ -275,7 +275,7 @@ export default function Hero() {
     <section id="hero" ref={sectionRef}>
       <style>{CSS}</style>
       <div className="board-frame">
-        <HeroSlideshow>
+        <HeroSlideshow introDuration={Math.max(...BOARD_DATA.map(row => row.rowDelay + (row.value.length - 1) * CHAR_STAGGER + SPIN_COUNT * CYCLE_INTERVAL + CYCLE_INTERVAL)) + 100}>
         <div
           className="board-grid"
           ref={gridRef}
