@@ -40,7 +40,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    color: #e2dfd8;
+    color: #e0d8cc;
   }
 
   .projects-divider {
@@ -116,7 +116,7 @@ const CSS = `
   .project-card-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #e2dfd8;
+    color: #e0d8cc;
     margin: 0 0 0.35rem;
     letter-spacing: -0.02em;
   }
@@ -187,7 +187,7 @@ const CSS = `
     padding: 0.8rem 1.4rem;
     background: #0d0d0d;
     border: 1px solid #484848;
-    color: #e2dfd8;
+    color: #e0d8cc;
     font: inherit;
     font-size: 0.72rem;
     font-weight: 600;

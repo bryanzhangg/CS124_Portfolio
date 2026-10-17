@@ -28,7 +28,7 @@ const CSS = `
     font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 56px;
     letter-spacing: 0.14em;
-    color: #c8c5bf;
+    color: #c8c2b8;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
@@ -53,9 +53,9 @@ const CSS = `
     align-items: center;
   }
 
-  .nav-brand-first { color: #c8c5bf; font-weight: 600; }
-  .nav-brand-sep   { color: #c8c5bf; font-weight: 600; }
-  .nav-brand-last  { color: #c8c5bf; font-weight: 600; }
+  .nav-brand-first { color: #c8c2b8; font-weight: 600; }
+  .nav-brand-sep   { color: #c8c2b8; font-weight: 600; }
+  .nav-brand-last  { color: #c8c2b8; font-weight: 600; }
 
   @keyframes nav-glitch {
     0%   { text-shadow: none;                                                    transform: none; }
@@ -77,7 +77,7 @@ const CSS = `
     font-size: 1.65rem;
     letter-spacing: -0.07em;
     line-height: 1;
-    color: #f0ede5;
+    color: #f0e8d0;
     display: inline-flex;
     align-items: baseline;
     transform: skewX(-8deg);
@@ -119,7 +119,7 @@ const CSS = `
     border: none;
     padding: 0.4rem;
     cursor: pointer;
-    color: #c8c5bf;
+    color: #c8c2b8;
     flex-shrink: 0;
   }
 
@@ -155,7 +155,7 @@ const CSS = `
     font-family: 'Inter', Helvetica, Arial, sans-serif;
     font-weight: 600;
     letter-spacing: 0.14em;
-    color: #c8c5bf;
+    color: #c8c2b8;
   }
 
   .nav-mobile-menu.open {

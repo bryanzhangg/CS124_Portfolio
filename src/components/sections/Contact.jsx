@@ -30,7 +30,7 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    color: #e2dfd8;
+    color: #e0d8cc;
   }
 
   .contact-divider {
@@ -93,13 +93,13 @@ const CSS = `
     font-family: 'B612 Mono', 'Courier New', monospace;
     font-size: 0.8rem;
     letter-spacing: 0.08em;
-    color: #c8c5bf;
+    color: #c8c2b8;
     text-transform: uppercase;
     transition: color 0.2s ease;
   }
 
   .contact-tile:hover .contact-tile-label { color: #555; }
-  .contact-tile:hover .contact-tile-value { color: #f0ede5; }
+  .contact-tile:hover .contact-tile-value { color: #f0e8d0; }
 
   @media (max-width: 768px) {
     #contact {

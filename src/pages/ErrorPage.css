@@ -11,13 +11,13 @@
 
 .error-content { max-width: 640px; width: 100%; }
 .error-eyebrow { color: #939393; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; }
-.error-content h1 { color: #e2dfd8; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.03em; line-height: 1.1; margin: 1rem 0; }
+.error-content h1 { color: #e0d8cc; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.03em; line-height: 1.1; margin: 1rem 0; }
 .error-content p { color: #a0a0a0; line-height: 1.8; }
 .error-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 .error-actions a, .error-actions button {
   display: inline-block;
   padding: 0.8rem 1.1rem;
-  color: #e2dfd8;
+  color: #e0d8cc;
   background: #111;
   border: 1px solid #484848;
   font: inherit;
