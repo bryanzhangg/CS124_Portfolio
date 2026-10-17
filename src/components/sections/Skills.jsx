@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import ShootingStars from "../ShootingStars";
 
 const CATEGORIES = [
   {
@@ -257,7 +256,6 @@ export default function Skills() {
     <>
       <style>{CSS}</style>
       <section id="skills" ref={ref}>
-        <ShootingStars />
         {scanning && <div className="scan-line" />}
 
         <span className="skills-eyebrow">Technical Profile</span>

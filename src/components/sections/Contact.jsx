@@ -1,4 +1,3 @@
-import ShootingStars from "../ShootingStars";
 
 // TODO: fill in your actual contact details
 const TILES = [
@@ -123,7 +122,6 @@ export default function Contact() {
     <>
       <style>{CSS}</style>
       <section id="contact">
-        <ShootingStars />
 
         <span className="contact-eyebrow">Let's Get in Touch</span>
         <p className="contact-label">Contact</p>

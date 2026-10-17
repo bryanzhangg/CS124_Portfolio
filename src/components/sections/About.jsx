@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import ShootingStars from "../ShootingStars";
 
 const CSS = `
   .about-section {
@@ -199,7 +198,6 @@ export default function About() {
     <>
       <style>{CSS}</style>
       <section id="about" className="about-section" ref={ref}>
-        <ShootingStars />
         <div className="about-inner">
 
           {/* ── Left: text ───────────────────────────── */}

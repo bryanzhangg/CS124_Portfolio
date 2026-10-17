@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ProjectCard from "../ProjectCard";
 import projects from "../../data/projects";
-import ShootingStars from "../ShootingStars";
 
 
 const CSS = `
@@ -235,7 +234,6 @@ export default function Projects() {
     <>
       <style>{CSS}</style>
       <section id="projects">
-        <ShootingStars />
         <div className="projects-inner">
           <span className="projects-eyebrow">Selected Work</span>
           {/* TODO: update label text if desired */}
