@@ -6,6 +6,9 @@ const CSS = `
     display: flex;
     align-items: stretch;
     padding: 4rem 9rem 2.5rem;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
   }
 
   /* Board shadow bleeds down onto the About section */
@@ -38,6 +41,7 @@ const CSS = `
     justify-content: center;
     gap: 1.4rem;
     min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .about-eyebrow {
@@ -134,6 +138,7 @@ const CSS = `
     position: relative;
     background: #111;
     overflow: hidden;
+    min-height: 220px;
   }
 
   .about-photo-frame::after {
@@ -146,16 +151,31 @@ const CSS = `
 
   /* TODO: replace with <img src="..." alt="Bryan Zhang" /> */
   .about-photo-frame img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
+  @media (max-width: 1100px) {
+    .about-inner {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .about-photo-col {
+      flex: 0 0 auto;
+      width: 100%;
+      height: clamp(220px, 40vw, 420px);
+    }
+  }
+
   @media (max-width: 768px) {
     .about-section {
       padding: 3rem 1.5rem 2.5rem;
       height: auto;
+      min-height: auto;
       align-items: flex-start;
     }
     .about-inner {
