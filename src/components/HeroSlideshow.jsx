@@ -13,6 +13,7 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
   const [failed, setFailed] = useState({});
   const [introDone, setIntroDone] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [saveData] = useState(() => Boolean(navigator.connection?.saveData));
 
@@ -48,7 +49,7 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
   }
 
   useEffect(() => {
-    if (!introDone || reduced || !visible || previous !== null) return;
+    if (!introDone || reduced || paused || !visible || previous !== null) return;
     const timer = setTimeout(() => {
       for (let step = 1; step < slides.length; step++) {
         const next = (current + step) % slides.length;
@@ -60,12 +61,12 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
       }
     }, current === 0 ? 1000 : slides[current].duration || 7000);
     return () => clearTimeout(timer);
-  }, [current, previous, introDone, reduced, visible, ready, failed]);
+  }, [current, previous, introDone, reduced, paused, visible, ready, failed]);
 
   useEffect(() => {
     Object.entries(videos.current).forEach(([id, video]) => {
       if (!video) return;
-      if (id === slides[current].id && visible && !reduced) {
+      if (id === slides[current].id && visible && !reduced && !paused) {
         video.play().catch(() => {
           setFailed(value => ({ ...value, [id]: true }));
           setCurrent(value => slides[value].id === id ? 0 : value);
@@ -74,7 +75,7 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
         video.pause();
       }
     });
-  }, [current, visible, reduced, introDone]);
+  }, [current, visible, reduced, paused, introDone]);
 
   return (
     <>
@@ -85,7 +86,7 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
           return (
             <div
               key={slide.id}
-              className={`hero-slide${active ? " is-active" : ""}${outgoing ? " is-previous" : ""}${active && previous !== null ? " is-wiping" : ""}`}
+              className={`hero-slide${slide.type === "intro" ? " is-intro" : ""}${active ? " is-active" : ""}${outgoing ? " is-previous" : ""}${active && previous !== null ? " is-wiping" : ""}`}
               aria-hidden={!active}
               role="group"
               aria-roledescription="slide"
@@ -116,9 +117,10 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
           );
         })}
         {previous !== null && (
-          <div className="hero-transition" aria-hidden="true">
-            <div className="hero-sweep hero-sweep-dark" />
-            <div className="hero-sweep hero-sweep-light" onAnimationEnd={() => setPrevious(null)} />
+          <div className="hero-transition" aria-hidden="true" onAnimationEnd={event => {
+            if (event.target === event.currentTarget) setPrevious(null);
+          }}>
+            <div className="hero-sweep"><div className="hero-sweep-dark" /><div className="hero-sweep-light" /></div>
           </div>
         )}
       </div>
@@ -135,6 +137,9 @@ export default function HeroSlideshow({ children, introDuration = 2300 }) {
             onClick={() => select(index)} />)}
         </div>
       </div>
+      <button className="hero-pause" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play slideshow" : "Pause slideshow"} aria-pressed={paused}>
+        {paused ? "PLAY" : "PAUSE"}
+      </button>
     </>
   );
 }

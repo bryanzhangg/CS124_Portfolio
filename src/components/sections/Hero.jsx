@@ -77,7 +77,7 @@ const CSS = `
     box-sizing: border-box;
     display: flex;
     background: #050505;
-    padding-top: 48px;
+    padding-top: 0;
     position: relative;
   }
 
@@ -99,7 +99,7 @@ const CSS = `
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 8px solid #1e1e1e;
+    border: 0;
   }
 
   .board-footer {
@@ -107,7 +107,7 @@ const CSS = `
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    padding: 0.35rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     flex-shrink: 0;
     font-family: 'B612 Mono', 'Courier New', monospace;
     font-weight: 500;
@@ -115,7 +115,7 @@ const CSS = `
     letter-spacing: 0.18em;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     background: linear-gradient(180deg, #0e0e0e 0%, #141414 100%);
-    border-top: 4px solid #0a0a0a;
+    border-top: 8px solid #0a0a0a;
   }
 
   .board-grid {
@@ -223,7 +223,7 @@ const CSS = `
     }
     .board-footer {
       font-size: 0.7rem;
-      padding: 0.35rem 1rem;
+      padding: 0.7rem 1rem;
     }
   }
 `;
