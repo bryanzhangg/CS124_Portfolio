@@ -27,7 +27,7 @@ const projects = [
     slug: "project-bmp390",
     title: "SPI Driver for Triple Modular Redundant BMP390 Barometer on STM32",
     caption: "Co-developed the embedded driver for a triple modular redundant BMP390 barometer array",
-    image: null,
+    image: "/assets/projects/Screenshot 2026-10-18 215504.png",
     gallery: [],
     description: "I co-developed the embedded driver for the barometer array that flew on Liquid Rocketry's active roll-controlled rocket. The barometer array is triple modular redundant, meaning we have three distinct BMP390 sensors communicating via the same SPI line. Upon each update, a voting algorithm will discard the outlier reading from one sensor and average the other two readings to produce safe, accurate, and fault-tolerant data. Within the driver itself, the header file defines the struct we store our data in (height, temperature, and pressure), provides the sensor indexes for our three sensors, and provides the interface for SPI communication. The implementation file assigns the sensor indexes to CS pins, toggles built-in sensor settings and measurements on or off, handles initialization errors, and implements SPI communication within the Init() function. The Update() function calls for sensor data, sensor status, and performs required unit conversions before sending the new readings via SPI.",
     tags: ["C", "C++", "STM32", "CLion", "Git"],
