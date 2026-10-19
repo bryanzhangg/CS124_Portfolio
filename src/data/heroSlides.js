@@ -32,3 +32,6 @@ const heroSlides = [
 ];
 
 export default heroSlides;
+// Set to true to restore the media slideshow and its controls.
+export const heroSlideshowEnabled = false;
+

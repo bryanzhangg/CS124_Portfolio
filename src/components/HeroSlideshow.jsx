@@ -1,10 +1,20 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
-import heroSlides from "../data/heroSlides";
+import heroSlides, { heroSlideshowEnabled } from "../data/heroSlides";
 import "./HeroSlideshow.css";
 
 const slides = [{ id: "intro", type: "intro", label: "Introduction", duration: 7000 }, ...heroSlides];
 
-export default function HeroSlideshow({ children, introDuration = 2300 }) {
+export default function HeroSlideshow(props) {
+  if (heroSlideshowEnabled) return <ActiveHeroSlideshow {...props} />;
+
+  return (
+    <div className="hero-slideshow-stage">
+      <div className="hero-slide is-intro is-active">{props.children}</div>
+    </div>
+  );
+}
+
+function ActiveHeroSlideshow({ children, introDuration = 2300 }) {
   const stage = useRef(null);
   const videos = useRef({});
   const clock = useRef({ slide: null, remaining: 0 });
