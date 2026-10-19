@@ -8,7 +8,7 @@ const TILES = [
 
 const CSS = `
   #contact {
-    --contact-cut: clamp(24px, 4vw, 40px);
+    --contact-cut: clamp(32px, 6vw, 88px);
     height: auto;
     overflow: visible;
     isolation: isolate;
@@ -21,10 +21,9 @@ const CSS = `
   #contact::before {
     content: '';
     position: absolute;
-    inset: 0 0 calc(-1 * var(--contact-cut));
+    inset: 0;
     z-index: -1;
     background: #e2dfd8;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--contact-cut)) calc(100% - var(--contact-cut)), 0 calc(100% - var(--contact-cut)));
     pointer-events: none;
   }
 

@@ -1,10 +1,10 @@
 .site-footer {
   padding: 0.9rem 1rem;
-  border-top: 1px solid #1c1c1c;
-  background: #050505;
+  border-top: 1px solid #24242430;
+  background: #e2dfd8;
   text-align: center;
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #939393;
+  color: #514d46;
 }
 
 .site-footer small {
