@@ -94,8 +94,10 @@ export default function SectionProgress() {
   useEffect(() => {
     function update() {
       const mid = window.innerHeight / 2;
-      const experience = document.getElementById("experience")?.getBoundingClientRect();
-      setOnLight(!!experience && experience.top <= mid && experience.bottom > mid);
+      setOnLight(["experience", "contact"].some(id => {
+        const rect = document.getElementById(id)?.getBoundingClientRect();
+        return !!rect && rect.top <= mid && rect.bottom > mid;
+      }));
       let closest = "hero";
       let closestDist = Infinity;
       for (const { id } of SECTIONS) {

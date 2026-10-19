@@ -8,10 +8,36 @@ const TILES = [
 
 const CSS = `
   #contact {
-    height: 50dvh;
+    --contact-cut: clamp(24px, 4vw, 40px);
+    height: auto;
+    overflow: visible;
+    isolation: isolate;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     padding: 3rem 9rem 2.5rem;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 calc(-1 * var(--contact-cut));
+    z-index: -1;
+    background: #e2dfd8;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--contact-cut)) calc(100% - var(--contact-cut)), 0 calc(100% - var(--contact-cut)));
+    pointer-events: none;
+  }
+
+  #contact::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--contact-cut);
+    height: var(--contact-cut);
+    background: #050505;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    pointer-events: none;
   }
 
   /* ── Header (matches Projects / Skills) ───────── */
@@ -30,21 +56,21 @@ const CSS = `
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
-    color: #e0d8cc;
+    color: #191919;
   }
 
   .contact-divider {
     height: 1px;
-    background: #1c1c1c;
+    background: #24242430;
     border: none;
-    margin: 1rem 0 1.5rem;
+    margin: 1rem 0 1.2rem;
+    width: 100%;
   }
 
   /* ── Tile row ─────────────────────────────────── */
   .contact-tiles-wrapper {
-    flex: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .contact-tiles {
@@ -57,6 +83,7 @@ const CSS = `
   .contact-tile {
     position: relative;
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -93,13 +120,15 @@ const CSS = `
     font-family: 'B612 Mono', 'Courier New', monospace;
     font-size: 0.8rem;
     letter-spacing: 0.08em;
-    color: #c8c2b8;
+    color: #191919;
+    overflow-wrap: anywhere;
     text-transform: uppercase;
     transition: color 0.2s ease;
   }
 
   .contact-tile:hover .contact-tile-label { color: #555; }
-  .contact-tile:hover .contact-tile-value { color: #f0e8d0; }
+  .contact-tile:hover .contact-tile-value { color: #514d46; }
+  .contact-tile:focus-visible { outline: 2px solid #514d46; outline-offset: 4px; }
 
   @media (max-width: 768px) {
     #contact {
