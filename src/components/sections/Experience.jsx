@@ -9,7 +9,7 @@ export default function Experience() {
   return (
     <section id="experience" className="experience-section" aria-labelledby="experience-title">
       <div className="experience-header">
-        {/*<span className="experience-eyebrow">Professional Profile</span>*/}
+        <span className="experience-eyebrow">Professional Profile</span>
         <h2 id="experience-title">Experience</h2>
       </div>
 

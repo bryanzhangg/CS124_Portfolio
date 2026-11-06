@@ -239,7 +239,7 @@ export default function Projects() {
       <style>{CSS}</style>
       <section id="projects">
         <div className="projects-inner">
-          {/*<span className="projects-eyebrow">Selected Work</span>*/}
+          <span className="projects-eyebrow">Selected Work</span>
           {/* TODO: update label text if desired */}
           <p className="projects-label">Projects</p>
           <hr className="projects-divider" />

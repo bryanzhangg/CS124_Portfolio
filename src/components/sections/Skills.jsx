@@ -258,7 +258,7 @@ export default function Skills() {
       <section id="skills" ref={ref}>
         {scanning && <div className="scan-line" />}
 
-        {/*<span className="skills-eyebrow">Technical Profile</span>*/}
+        <span className="skills-eyebrow">Technical Profile</span>
         <p className="skills-label">Skills</p>
         <hr className="skills-divider" />
 

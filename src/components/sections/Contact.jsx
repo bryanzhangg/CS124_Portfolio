@@ -151,7 +151,7 @@ export default function Contact() {
       <style>{CSS}</style>
       <section id="contact">
 
-        {/*<span className="contact-eyebrow">Let's Get in Touch</span>*/}
+        <span className="contact-eyebrow">Let's Get in Touch</span>
         <p className="contact-label">Contact</p>
         <hr className="contact-divider" />
 
