@@ -202,7 +202,7 @@ export default function About() {
 
           {/* ── Left: text ───────────────────────────── */}
           <div className="about-text-col">
-            <span className="about-eyebrow">About</span>
+            {/*<span className="about-eyebrow">About</span>*/}
 
             {/* TODO: your name or a short headline */}
             <h2 className="about-heading">Bryan Zhang</h2>
