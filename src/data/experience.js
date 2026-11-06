@@ -17,7 +17,7 @@ const experience = [
     organization: "Illini Electric Motorsports",
     logo: "/assets/experience/iem_logo_polychrome.png",
     description: "Creating schematics, laying out PCBs, and writing embedded drivers with Dash Circuits, R&D, and Software.",
-    highlights: ["Led trade study between ten custom dash displays, prioritizing selection based on MIPI DSI, Linux compute-node compatibility, and backlight power consumption", "Building embedded driver for TIC10024-Q1 MSDI, allowing pull-up/pull-down and threshold voltage configuration"],
+    highlights: ["Designing high-speed custom dashboard PCB, ensuring trace impedance matching for differential pairs and optimizing component layout for heat and EMI reduction", "Building embedded driver for TIC10024-Q1 MSDI, allowing pull-up/pull-down and threshold voltage configuration"],
     tags: ["Altium Designer", "WSL/Linux", "STM32", "RTOS"],
   },
   {
