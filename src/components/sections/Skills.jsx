@@ -119,7 +119,9 @@ const CSS = `
   .skill-target {
     position: relative;
     display: inline-block;
+    flex: 1 1 auto;
     padding: 0.45rem 0.7rem;
+    text-align: center;
     cursor: default;
   }
 
