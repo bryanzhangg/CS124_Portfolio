@@ -43,7 +43,7 @@ const CSS = `
 
   .nav-initials {
     font-family: inherit;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 3rem;
     letter-spacing: -0.07em;
     line-height: 1;
