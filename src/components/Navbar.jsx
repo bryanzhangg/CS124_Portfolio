@@ -21,11 +21,11 @@ const CSS = `
     padding: 0 0.85rem 0 1.5rem;
     background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
     border-bottom: 0;
-    font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-title);
     font-weight: 500;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 56px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.04em;
     color: #d4cfc6;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
@@ -44,8 +44,8 @@ const CSS = `
   .nav-initials {
     font-family: inherit;
     font-weight: 500;
-    font-size: 3rem;
-    letter-spacing: -0.07em;
+    font-size: 2.5rem;
+    letter-spacing: -0.035em;
     line-height: 1;
     color: inherit;
     display: inline-flex;
@@ -161,9 +161,9 @@ const CSS = `
     visibility: hidden;
     transform: translateY(-6px);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-    font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-title);
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.04em;
     color: #d4cfc6;
   }
 
