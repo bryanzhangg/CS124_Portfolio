@@ -23,7 +23,7 @@ const CSS = `
     border-bottom: 0;
     font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 500;
-    font-size: clamp(0.8rem, 1.65vw, 1.0625rem);
+    font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 56px;
     letter-spacing: 0.14em;
     color: #d4cfc6;
@@ -44,7 +44,7 @@ const CSS = `
   .nav-initials {
     font-family: inherit;
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     letter-spacing: -0.07em;
     line-height: 1;
     color: inherit;
@@ -185,7 +185,7 @@ const CSS = `
   }
 
   .nav-mobile-links a {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
