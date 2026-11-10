@@ -34,7 +34,7 @@ const CSS = `
     position: relative;
     display: flex;
     align-items: center;
-    padding: 0.5rem 0.65rem;
+    padding: 0.125rem 0.65rem 0.125rem 0;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
@@ -44,7 +44,7 @@ const CSS = `
   .nav-initials {
     font-family: inherit;
     font-weight: 700;
-    font-size: 1.65rem;
+    font-size: 3rem;
     letter-spacing: -0.07em;
     line-height: 1;
     color: inherit;
@@ -83,7 +83,6 @@ const CSS = `
     transition: color 140ms ease-out;
   }
 
-  .nav-left::before,
   .nav-links a::before,
   .nav-mobile-links a::before,
   .nav-hamburger::before {
@@ -112,7 +111,6 @@ const CSS = `
     color: #eeeae3;
   }
 
-  .nav-left:is(:hover, :focus-visible)::before,
   .nav-links a:is(:hover, :focus-visible)::before,
   .nav-mobile-links a:is(:hover, :focus-visible)::before,
   .nav-hamburger:is(:hover, :focus-visible)::before {
@@ -190,7 +188,6 @@ const CSS = `
 
   @media (prefers-reduced-motion: reduce) {
     .nav-left,
-    .nav-left::before,
     .nav-links a,
     .nav-mobile-links a,
     .nav-hamburger,
