@@ -11,19 +11,6 @@ const CSS = `
     overflow: visible;
   }
 
-  /* Board shadow bleeds down onto the About section */
-  .about-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 90px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
-    pointer-events: none;
-    z-index: 0;
-  }
-
   .about-inner {
     position: relative;
     z-index: 1;
@@ -175,7 +162,7 @@ const CSS = `
     .about-section {
       padding: 3rem 1.5rem 2.5rem;
       height: auto;
-      min-height: auto;
+      min-height: 100dvh;
       align-items: flex-start;
     }
     .about-inner {
@@ -197,7 +184,7 @@ export default function About() {
   return (
     <>
       <style>{CSS}</style>
-      <section id="about" className="about-section">
+      <section className="about-section" aria-label="About">
         <div className="about-inner">
 
           {/* ── Left: text ───────────────────────────── */}

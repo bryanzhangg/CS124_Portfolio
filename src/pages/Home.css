@@ -1,0 +1,19 @@
+.hero-about-reveal {
+  position: relative;
+  isolation: isolate;
+  --about-offset: -100dvh;
+}
+
+.hero-about-reveal #hero {
+  z-index: 2;
+  box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.4);
+}
+
+.hero-about-reveal #about {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-about-reveal .about-section {
+  transform: translateY(var(--about-offset));
+}
