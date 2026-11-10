@@ -31,14 +31,6 @@ const CSS = `
     overflow-wrap: anywhere;
   }
 
-  .about-eyebrow {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #484848;
-  }
-
   .about-heading {
     font-size: clamp(2.4rem, 4.5vw, 4.5rem);
     font-weight: 700;
@@ -189,8 +181,6 @@ export default function About() {
 
           {/* ── Left: text ───────────────────────────── */}
           <div className="about-text-col">
-            <span className="about-eyebrow">About</span>
-
             {/* TODO: your name or a short headline */}
             <h2 className="about-heading">Bryan Zhang</h2>
 
