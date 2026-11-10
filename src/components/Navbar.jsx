@@ -18,7 +18,7 @@ const CSS = `
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 0 0 1.5rem;
+    padding: 0 0.85rem 0 1.5rem;
     background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
     border-bottom: 0;
     font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
@@ -201,7 +201,7 @@ const CSS = `
   /* ── Mobile overrides ──────────────────────────── */
   @media (max-width: 768px) {
     .site-nav {
-      padding: 0 0 0 1rem;
+      padding: 0 0.6rem 0 1rem;
     }
     .nav-links {
       display: none;
