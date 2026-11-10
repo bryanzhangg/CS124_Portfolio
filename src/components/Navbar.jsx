@@ -105,16 +105,16 @@ const CSS = `
     transition: opacity 140ms ease-out, transform 140ms ease-out;
   }
 
-  .nav-left:is(:hover, :focus-visible),
-  .nav-links a:is(:hover, :focus-visible),
-  .nav-mobile-links a:is(:hover, :focus-visible),
+  .nav-left:is(:hover, :focus-visible, [aria-current="location"]),
+  .nav-links a:is(:hover, :focus-visible, [aria-current="location"]),
+  .nav-mobile-links a:is(:hover, :focus-visible, [aria-current="location"]),
   .nav-hamburger:is(:hover, :focus-visible) {
     color: #eeeae3;
   }
 
-  .nav-left:is(:hover, :focus-visible)::before,
-  .nav-links a:is(:hover, :focus-visible)::before,
-  .nav-mobile-links a:is(:hover, :focus-visible)::before,
+  .nav-left:is(:hover, :focus-visible, [aria-current="location"])::before,
+  .nav-links a:is(:hover, :focus-visible, [aria-current="location"])::before,
+  .nav-mobile-links a:is(:hover, :focus-visible, [aria-current="location"])::before,
   .nav-hamburger:is(:hover, :focus-visible)::before {
     opacity: 1;
     transform: scale(1);
@@ -222,6 +222,67 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const onHome = pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+  const currentSection = onHome ? activeSection : null;
+
+  useEffect(() => {
+    if (!onHome) return;
+    const hero = document.getElementById("hero");
+    const sections = NAV_LINKS.map(({ id }) => ({
+      id,
+      // About's navigation anchor is below its visible sticky surface.
+      element: id === "about"
+        ? document.querySelector(".about-section")
+        : document.getElementById(id),
+    }));
+    const nav = document.querySelector(".site-nav");
+    let frame = 0;
+    let previous;
+
+    function update() {
+      frame = 0;
+      const navHeight = nav?.offsetHeight ?? 56;
+      const readingLine = navHeight + (window.innerHeight - navHeight) * 0.35;
+      let next = "hero";
+
+      // The hero covers About until its trailing edge passes the reading line.
+      if (!hero || hero.getBoundingClientRect().bottom <= readingLine) {
+        for (const { id, element } of sections) {
+          if (element && element.getBoundingClientRect().top <= readingLine) next = id;
+        }
+        // Short final sections should still activate at the end of the page.
+        const contact = sections.find(({ id }) => id === "contact")?.element;
+        if (contact && contact.getBoundingClientRect().top < window.innerHeight &&
+            window.scrollY > 0 &&
+            window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+          next = "contact";
+        }
+      }
+
+      // Update React only when the active section changes.
+      if (next !== previous) {
+        previous = next;
+        setActiveSection(next);
+      }
+    }
+
+    function scheduleUpdate() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    const observer = new ResizeObserver(scheduleUpdate);
+    const main = document.querySelector("main");
+    if (main) observer.observe(main);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [onHome]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -260,7 +321,7 @@ export default function Navbar() {
         <ul className="nav-links">
           {NAV_LINKS.map(({ label, id }) => (
             <li key={id}>
-              <a href={`/#${id}`} onClick={(e) => handleClick(e, id)}>{label}</a>
+              <a href={`/#${id}`} aria-current={currentSection === id ? "location" : undefined} onClick={(e) => handleClick(e, id)}>{label}</a>
             </li>
           ))}
         </ul>
@@ -278,7 +339,7 @@ export default function Navbar() {
         <ul className="nav-mobile-links">
           {NAV_LINKS.map(({ label, id }) => (
             <li key={id}>
-              <a href={`/#${id}`} onClick={(e) => handleClick(e, id)}>{label}</a>
+              <a href={`/#${id}`} aria-current={currentSection === id ? "location" : undefined} onClick={(e) => handleClick(e, id)}>{label}</a>
             </li>
           ))}
         </ul>
