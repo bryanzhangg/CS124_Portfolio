@@ -20,6 +20,8 @@ const CSS = `
     display: flex;
     flex-direction: column;
     padding: 3rem 9rem;
+    height: auto;
+    overflow: visible;
   }
 
   /* ── Scan line (plays once on entry) ─────────── */
@@ -67,32 +69,34 @@ const CSS = `
 
   /* ── HUD inner wrapper ────────────────────────── */
   .hud-inner {
-    flex: 1;
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
-    overflow: hidden;
+    overflow: visible;
   }
 
   /* ── Category columns ─────────────────────────── */
   .hud-grid {
-    flex: 1;
     display: flex;
-    overflow: hidden;
+    flex-direction: column;
+    overflow: visible;
   }
 
   .hud-category {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 3rem;
-    border-right: 1px solid #1e1e1e;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #1e1e1e;
+    margin-bottom: 1.5rem;
   }
 
-  .hud-category:first-child { padding-left: 0; }
-  .hud-category:last-child  { border-right: none; padding-right: 0; }
+  .hud-category:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
 
   .hud-category-label {
     font-family: 'B612 Mono', 'Courier New', monospace;
@@ -105,10 +109,10 @@ const CSS = `
   }
 
   .hud-skills-list {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.4rem;
   }
 
   /* ── Skill target ─────────────────────────────── */
@@ -168,36 +172,6 @@ const CSS = `
   @media (max-width: 768px) {
     #skills {
       padding: 2.5rem 1.5rem;
-      height: auto;
-      overflow: visible;
-    }
-    .hud-inner {
-      overflow: visible;
-    }
-    .hud-grid {
-      flex-direction: column;
-      overflow: visible;
-      gap: 0;
-    }
-    .hud-category {
-      flex: 0 0 auto;
-      padding: 0 0 1.5rem 0;
-      border-right: none;
-      border-bottom: 1px solid #1e1e1e;
-      margin-bottom: 1.5rem;
-    }
-    .hud-category:first-child { padding-left: 0; }
-    .hud-category:last-child {
-      border-right: none;
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
-    }
-    .hud-skills-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 0.4rem;
     }
   }
 `;
