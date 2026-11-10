@@ -19,12 +19,10 @@ const CSS = `
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
-    background: linear-gradient(180deg, rgba(20,20,20,0.65), rgba(14,14,14,0.45));
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
     border-bottom: 0;
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 56px;
     letter-spacing: 0.14em;
@@ -33,51 +31,23 @@ const CSS = `
   }
 
   .nav-left {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    padding: 0.5rem 0.65rem;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    transition: color 140ms ease-out;
   }
-
-  .hero-mode .nav-brand {
-    display: none;
-  }
-
-  .nav-brand {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 1.1em;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-brand-first { color: #c8c2b8; font-weight: 600; }
-  .nav-brand-sep   { color: #c8c2b8; font-weight: 600; }
-  .nav-brand-last  { color: #c8c2b8; font-weight: 600; }
-
-  @keyframes nav-glitch {
-    0%   { text-shadow: none;                                                    transform: none; }
-    18%  { text-shadow:  3px 0 rgba(0,220,255,0.9), -3px 0 rgba(255,0,80,0.9);  transform: translateX(-3px); }
-    36%  { text-shadow: -3px 0 rgba(0,220,255,0.75), 3px 0 rgba(255,0,80,0.75); transform: translateX( 3px); }
-    54%  { text-shadow:  2px 0 rgba(255,0,80,0.65);                              transform: translateX(-2px); }
-    72%  { text-shadow: -1px 0 rgba(0,220,255,0.5);                              transform: translateX( 1px); }
-    88%  { text-shadow:  1px 0 rgba(0,220,255,0.2);                              transform: none; }
-    100% { text-shadow: none;                                                    transform: none; }
-  }
-
-  .nav-left:hover .nav-brand-first,
-  .nav-left:hover .nav-brand-sep,
-  .nav-left:hover .nav-brand-last { animation: nav-glitch 0.38s step-start forwards; }
 
   .nav-initials {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-family: inherit;
+    font-weight: 500;
     font-size: 1.65rem;
     letter-spacing: -0.07em;
     line-height: 1;
-    color: #f0e8d0;
+    color: inherit;
     display: inline-flex;
     align-items: baseline;
     transform: skewX(-8deg);
@@ -95,22 +65,64 @@ const CSS = `
   /* ── Desktop nav links ─────────────────────────── */
   .nav-links {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 1rem;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .nav-links a {
+  .nav-links a,
+  .nav-mobile-links a {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 0.65rem;
     text-decoration: none;
     color: inherit;
-    transition: opacity 0.2s;
+    white-space: nowrap;
+    transition: color 140ms ease-out;
   }
 
-  .nav-links a:hover { opacity: 0.55; }
+  .nav-left::before,
+  .nav-links a::before,
+  .nav-mobile-links a::before,
+  .nav-hamburger::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(currentColor, currentColor) top left / 6px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) top left / 1px 6px no-repeat,
+      linear-gradient(currentColor, currentColor) top right / 6px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) top right / 1px 6px no-repeat,
+      linear-gradient(currentColor, currentColor) bottom left / 6px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) bottom left / 1px 6px no-repeat,
+      linear-gradient(currentColor, currentColor) bottom right / 6px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) bottom right / 1px 6px no-repeat;
+    opacity: 0;
+    transform: scale(1.12, 1.2);
+    transition: opacity 140ms ease-out, transform 140ms ease-out;
+  }
+
+  .nav-left:is(:hover, :focus-visible),
+  .nav-links a:is(:hover, :focus-visible),
+  .nav-mobile-links a:is(:hover, :focus-visible),
+  .nav-hamburger:is(:hover, :focus-visible) {
+    color: #e2dfd8;
+  }
+
+  .nav-left:is(:hover, :focus-visible)::before,
+  .nav-links a:is(:hover, :focus-visible)::before,
+  .nav-mobile-links a:is(:hover, :focus-visible)::before,
+  .nav-hamburger:is(:hover, :focus-visible)::before {
+    opacity: 1;
+    transform: scale(1);
+  }
 
   /* ── Hamburger button (hidden on desktop) ──────── */
   .nav-hamburger {
+    position: relative;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -121,6 +133,7 @@ const CSS = `
     cursor: pointer;
     color: #c8c2b8;
     flex-shrink: 0;
+    transition: color 140ms ease-out;
   }
 
   .nav-hamburger span {
@@ -142,18 +155,16 @@ const CSS = `
     position: fixed;
     top: 56px;
     left: 0; right: 0;
-    background: linear-gradient(180deg, rgba(20,20,20,0.85), rgba(14,14,14,0.75));
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
+    border-bottom: 0;
     padding: 1.2rem 1rem 1.4rem;
     z-index: 99;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-6px);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-    font-family: 'Inter', Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
     letter-spacing: 0.14em;
     color: #c8c2b8;
   }
@@ -174,18 +185,25 @@ const CSS = `
   }
 
   .nav-mobile-links a {
-    text-decoration: none;
-    color: inherit;
     font-size: 0.85rem;
-    transition: opacity 0.2s;
   }
 
-  .nav-mobile-links a:hover { opacity: 0.55; }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-left,
+    .nav-left::before,
+    .nav-links a,
+    .nav-mobile-links a,
+    .nav-hamburger,
+    .nav-links a::before,
+    .nav-mobile-links a::before,
+    .nav-hamburger::before {
+      transition: none;
+    }
+  }
 
   /* ── Mobile overrides ──────────────────────────── */
   @media (max-width: 768px) {
-    .site-nav.hero-mode,
-    .site-nav.default-mode {
+    .site-nav {
       padding: 0 1rem;
     }
     .nav-links {
@@ -203,22 +221,7 @@ const CSS = `
 export default function Navbar() {
   const { pathname } = useLocation();
   const onHome = pathname === "/";
-  const [isHero, setIsHero] = useState(onHome);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    function check() {
-      const hero = document.getElementById("hero");
-      setIsHero(onHome && !!hero && hero.getBoundingClientRect().bottom > 56);
-    }
-    check();
-    window.addEventListener("scroll", check, { passive: true });
-    window.addEventListener("resize", check);
-    return () => {
-      window.removeEventListener("scroll", check);
-      window.removeEventListener("resize", check);
-    };
-  }, [onHome]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -238,7 +241,7 @@ export default function Navbar() {
   return (
     <>
       <style>{CSS}</style>
-      <nav className={`site-nav ${isHero ? "hero-mode" : "default-mode"}`}>
+      <nav className="site-nav">
         <a
           className="nav-left"
           href="/"
@@ -251,11 +254,7 @@ export default function Navbar() {
             setMenuOpen(false);
           }}
         >
-          {isHero ? <span className="nav-initials" aria-hidden="true">B<span className="nav-initials-separator" />Z</span> : <span className="nav-brand">
-            <span className="nav-brand-first">BRYAN</span>
-            <span className="nav-brand-sep">_</span>
-            <span className="nav-brand-last">ZHANG</span>
-          </span>}
+          <span className="nav-initials" aria-hidden="true">B<span className="nav-initials-separator" />Z</span>
         </a>
 
         <ul className="nav-links">
