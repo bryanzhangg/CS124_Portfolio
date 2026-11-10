@@ -22,11 +22,11 @@ const CSS = `
     background: linear-gradient(180deg, #141414 0%, #0e0e0e 100%);
     border-bottom: 0;
     font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: clamp(0.75rem, 1.6vw, 1rem);
     height: 56px;
     letter-spacing: 0.14em;
-    color: #c8c2b8;
+    color: #d4cfc6;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
@@ -43,7 +43,7 @@ const CSS = `
 
   .nav-initials {
     font-family: inherit;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.65rem;
     letter-spacing: -0.07em;
     line-height: 1;
@@ -109,7 +109,7 @@ const CSS = `
   .nav-links a:is(:hover, :focus-visible),
   .nav-mobile-links a:is(:hover, :focus-visible),
   .nav-hamburger:is(:hover, :focus-visible) {
-    color: #e2dfd8;
+    color: #eeeae3;
   }
 
   .nav-left:is(:hover, :focus-visible)::before,
@@ -131,7 +131,7 @@ const CSS = `
     border: none;
     padding: 0.4rem;
     cursor: pointer;
-    color: #c8c2b8;
+    color: #d4cfc6;
     flex-shrink: 0;
     transition: color 140ms ease-out;
   }
@@ -164,9 +164,9 @@ const CSS = `
     transform: translateY(-6px);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
     font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.14em;
-    color: #c8c2b8;
+    color: #d4cfc6;
   }
 
   .nav-mobile-menu.open {
