@@ -1,19 +1,41 @@
 .hero-about-reveal {
   position: relative;
   isolation: isolate;
-  --about-offset: -100dvh;
+  /* Stable during mobile browser toolbar expansion/collapse. */
+  --hero-height: 100svh;
 }
 
 .hero-about-reveal #hero {
+  height: var(--hero-height);
   z-index: 2;
   box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.4);
 }
 
-.hero-about-reveal #about {
+.about-reveal-track {
   position: relative;
   z-index: 1;
+  margin-top: calc(-1 * var(--hero-height));
+}
+
+/* This runway holds About still for exactly the hero's scroll distance.
+   Afterward the sticky surface reaches the track's end and scrolls normally. */
+.about-reveal-track::after {
+  content: "";
+  display: block;
+  height: var(--hero-height);
+}
+
+.about-scroll-anchor {
+  position: absolute;
+  top: var(--hero-height);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
 }
 
 .hero-about-reveal .about-section {
-  transform: translateY(var(--about-offset));
+  position: sticky;
+  top: 0;
+  min-height: 100lvh;
 }

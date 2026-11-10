@@ -17,7 +17,7 @@ function randomChar() {
   return CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
 }
 
-function SplitFlapChar({ targetChar, delay, scrambleDelay, flippedAway }) {
+function SplitFlapChar({ targetChar, delay, scrambleDelay, flippedAway, visible }) {
   const [cur, setCur] = useState(randomChar);
   const [prev, setPrev] = useState('');
   const [flipKey, setFlipKey] = useState(0);
@@ -32,7 +32,7 @@ function SplitFlapChar({ targetChar, delay, scrambleDelay, flippedAway }) {
   }, []);
 
   useEffect(() => {
-    if (flippedAway) return;
+    if (flippedAway || !visible) return;
     let timeoutId, intervalId;
     timeoutId = setTimeout(() => {
       ticksRef.current = 0;
@@ -47,16 +47,16 @@ function SplitFlapChar({ targetChar, delay, scrambleDelay, flippedAway }) {
       }, CYCLE_INTERVAL);
     }, delay);
     return () => { clearTimeout(timeoutId); clearInterval(intervalId); };
-  }, [targetChar, delay, flippedAway, advance]);
+  }, [targetChar, delay, flippedAway, visible, advance]);
 
   useEffect(() => {
-    if (!flippedAway) return;
+    if (!flippedAway || !visible) return;
     let intervalId;
     const timeoutId = setTimeout(() => {
       intervalId = setInterval(() => advance(randomChar()), CYCLE_INTERVAL);
     }, scrambleDelay);
     return () => { clearTimeout(timeoutId); clearInterval(intervalId); };
-  }, [flippedAway, scrambleDelay, advance]);
+  }, [flippedAway, scrambleDelay, visible, advance]);
 
   return (
     <span className="flap-tile">
@@ -234,6 +234,22 @@ export default function Hero() {
   const probeRef = useRef(null);
   const [dims, setDims] = useState({ cols: 0, rows: 0 });
   const [flippedAway, setFlippedAway] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    let inView = true;
+    const update = () => setVisible(inView && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      update();
+    });
+    observer.observe(sectionRef.current);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
 
   useEffect(() => {
     function measure() {
@@ -300,6 +316,7 @@ export default function Hero() {
                 delay={textData.rowDelay + colIdx * CHAR_STAGGER}
                 scrambleDelay={textData.scrambleDelay + colIdx * CHAR_STAGGER}
                 flippedAway={flippedAway}
+                visible={visible}
               />
             );
           })}

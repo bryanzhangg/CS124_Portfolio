@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect } from "react";
 import "./Home.css";
 import { useLocation } from "react-router-dom";
 import Hero from "../components/sections/Hero";
@@ -11,36 +11,6 @@ import SectionProgress from "../components/SectionProgress";
 
 export default function Home() {
   const { hash, key } = useLocation();
-  const revealRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const reveal = revealRef.current;
-    const hero = reveal.querySelector("#hero");
-    let frame = 0;
-
-    function update() {
-      frame = 0;
-      // Cancel About's normal movement until the board has cleared it.
-      const remaining = Math.max(0, hero.getBoundingClientRect().bottom);
-      reveal.style.setProperty("--about-offset", `${-remaining}px`);
-    }
-
-    function scheduleUpdate() {
-      if (!frame) frame = requestAnimationFrame(update);
-    }
-
-    update();
-    const observer = new ResizeObserver(scheduleUpdate);
-    observer.observe(hero);
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-    };
-  }, []);
 
   useLayoutEffect(() => {
     if (!hash) return;
@@ -56,10 +26,11 @@ export default function Home() {
   return (
     <main>
       <SectionProgress />
-      <div className="hero-about-reveal" ref={revealRef}>
+      <div className="hero-about-reveal">
         <Hero />
-        {/* Keep the navigation anchor in normal flow while its surface moves. */}
-        <div id="about">
+        <div className="about-reveal-track">
+          {/* The anchor marks where About starts scrolling after the reveal. */}
+          <div id="about" className="about-scroll-anchor" aria-hidden="true" />
           <About />
         </div>
       </div>
