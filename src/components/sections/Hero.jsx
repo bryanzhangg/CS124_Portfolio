@@ -181,8 +181,8 @@ const CSS = `
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-title);
-    font-size: clamp(1.15rem, 5vw, 4.5rem);
+    font-family: 'B612 Mono', 'Courier New', monospace;
+    font-size: clamp(1.25rem, 5.5vw, 5rem);
     font-weight: 500;
     color: #f0e8d0;
   }
