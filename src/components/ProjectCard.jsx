@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function ProjectCard({ project }) {
-  const { slug, title, caption, image } = project;
+  const { slug, title, image } = project;
 
   return (
     <Link to={`/projects/${slug}`} className="project-card">
@@ -24,10 +24,13 @@ export default function ProjectCard({ project }) {
             </div>
           )
         }
-      </div>
-      <div className="project-card-body">
-        <h3 className="project-card-title">{title}</h3>
-        <p className="project-card-caption">{caption}</p>
+        <div className="project-card-title-box">
+          <span className="pc-br pc-br-tl" aria-hidden="true" />
+          <span className="pc-br pc-br-tr" aria-hidden="true" />
+          <span className="pc-br pc-br-bl" aria-hidden="true" />
+          <span className="pc-br pc-br-br" aria-hidden="true" />
+          <h3 className="project-card-title">{title}</h3>
+        </div>
       </div>
     </Link>
   );

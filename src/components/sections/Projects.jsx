@@ -103,22 +103,32 @@ const CSS = `
     display: block;
   }
 
-  .project-card-body {
-    flex-shrink: 0;
-    padding: 0.75rem 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    background: linear-gradient(180deg, rgba(24,24,24,0.82), rgba(18,18,18,0.72));
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  .project-card-title-box {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+    box-sizing: border-box;
+    padding: 0.65rem 0.85rem;
+    background: rgba(32,32,32,0.88);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
   }
 
   .project-card-title {
-    font-size: 1.1rem;
+    font-size: clamp(1.2rem, 1.7vw, 1.6rem);
     font-weight: 700;
-    color: #e0d8cc;
-    margin: 0 0 0.35rem;
+    line-height: 1.2;
+    color: #e2dfd8;
+    margin: 0;
     letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+
+  .project-card-title-box .pc-br {
+    width: 8px;
+    height: 8px;
+    border-color: rgba(226,223,216,0.6);
   }
 
   .pc-br {
@@ -171,14 +181,6 @@ const CSS = `
     color: #383838;
     text-transform: uppercase;
     user-select: none;
-  }
-
-  .project-card-caption {
-    font-size: 0.68rem;
-    font-weight: 500;
-    color: #7b7878;
-    margin: 0;
-    letter-spacing: 0.1em;
   }
 
   .projects-more {
