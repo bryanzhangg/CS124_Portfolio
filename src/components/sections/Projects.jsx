@@ -110,18 +110,19 @@ const CSS = `
     max-width: calc(100% - 1.5rem);
     box-sizing: border-box;
     padding: 0.65rem 0.85rem;
-    background: rgba(32,32,32,0.88);
+    background: rgba(64,64,64,0.62);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
   }
 
   .project-card-title {
-    font-size: clamp(1.2rem, 1.7vw, 1.6rem);
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-weight: 600;
+    line-height: 1.3;
     color: #e2dfd8;
     margin: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
     overflow-wrap: anywhere;
   }
 
