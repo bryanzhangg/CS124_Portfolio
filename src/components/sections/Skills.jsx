@@ -42,16 +42,6 @@ const CSS = `
   }
 
   /* ── Section header (matches Projects) ───────── */
-  .skills-eyebrow {
-    display: block;
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #484848;
-    margin-bottom: 0.5rem;
-  }
-
   .skills-label {
     font-size: clamp(2.2rem, 4.5vw, 4rem);
     font-weight: 700;
@@ -234,7 +224,7 @@ export default function Skills() {
       <section id="skills" ref={ref}>
         {scanning && <div className="scan-line" />}
 
-        <span className="skills-eyebrow">Technical Profile</span>
+
         <p className="skills-label">Skills</p>
         <hr className="skills-divider" />
 

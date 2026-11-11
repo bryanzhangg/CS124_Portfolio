@@ -25,7 +25,7 @@ const projects = [
   },
   {
     slug: "project-bmp390",
-    title: "SPI Driver for Triple Modular Redundant BMP390 Barometer on STM32",
+    title: "STM32 SPI Driver for BMP390",
     caption: "Co-developed the embedded driver for a triple modular redundant BMP390 barometer array",
     image: "/assets/projects/Screenshot 2026-10-18 215504.png",
     gallery: [],

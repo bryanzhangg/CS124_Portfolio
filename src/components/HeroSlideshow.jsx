@@ -142,7 +142,6 @@ function ActiveHeroSlideshow({ children, introDuration = 2300 }) {
               {slide.type !== "intro" && slide.showText !== false && (
                 <div className="hero-slide-caption" style={{ "--slide-font": slide.fontFamily || "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
                   <div className="hero-slide-copy">
-                    {slide.eyebrow && <span className="hero-slide-eyebrow">{slide.eyebrow}</span>}
                     <h2>{slide.heading || slide.label}</h2>
                     {slide.description && <p>{slide.description}</p>}
                   </div>

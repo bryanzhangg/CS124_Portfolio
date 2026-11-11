@@ -24,16 +24,6 @@ const CSS = `
   }
 
   /* ── Section header ───────────────────────────── */
-  .projects-eyebrow {
-    display: block;
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #484848;
-    margin-bottom: 0.5rem;
-  }
-
   .projects-label {
     flex-shrink: 0;
     font-size: clamp(2.2rem, 4.5vw, 4rem);
@@ -116,6 +106,7 @@ const CSS = `
   }
 
   .project-card-title {
+    font-family: var(--font-title);
     font-size: clamp(1.1rem, 1.5vw, 1.4rem);
     font-weight: 600;
     line-height: 1.3;
@@ -242,7 +233,7 @@ export default function Projects() {
       <style>{CSS}</style>
       <section id="projects">
         <div className="projects-inner">
-          <span className="projects-eyebrow">Selected Work</span>
+
           {/* TODO: update label text if desired */}
           <p className="projects-label">Projects</p>
           <hr className="projects-divider" />

@@ -4,7 +4,7 @@ export default function ErrorPage({ unexpected = false, project = false }) {
   return (
     <main className="error-page">
       <div className="error-content">
-        <span className="error-eyebrow">{unexpected ? "Something went wrong" : "404 / Not found"}</span>
+
         <h1>{unexpected ? "A brief interruption." : project ? "Project not found." : "Off the flight path."}</h1>
         <p>{unexpected
           ? "The page couldn’t be displayed. Reload to try again, or return home."

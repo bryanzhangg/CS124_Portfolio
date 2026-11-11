@@ -7,7 +7,6 @@
 .detail-hero-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, #0005, transparent 30%, #05050540 55%, #050505e6 85%, #050505 100%); }
 .detail-back { position: absolute; top: 5.5rem; left: var(--detail-gutter); color: #e0d8cc; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.7rem 1rem; background: #05050580; border: 1px solid #ffffff30; }
 .detail-hero-title { position: relative; padding: 3rem var(--detail-gutter) 2.5rem; width: 100%; box-sizing: border-box; }
-.detail-eyebrow { color: #b1aaa0; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; }
 .detail-hero-title h1 { max-width: 1200px; font-size: clamp(2.3rem, 5.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.04em; margin: 0.85rem 0 0; color: #e0d8cc; overflow-wrap: anywhere; }
 .detail-content { padding: 0 var(--detail-gutter); }
 .detail-tags { list-style: none; padding: 0; margin: 0 0 1.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }

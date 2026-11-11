@@ -51,14 +51,6 @@
   border-bottom: 1px solid #24242430;
 }
 
-.experience-eyebrow {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #484848;
-}
-
 .experience-header h2 {
   font-size: clamp(2.2rem, 4.5vw, 4rem);
   font-weight: 700;
