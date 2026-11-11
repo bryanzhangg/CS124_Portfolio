@@ -12,6 +12,11 @@ const CSS = `
     position: relative;
   }
 
+  .contact-scroll-panel {
+    position: sticky;
+    top: 0;
+  }
+
   .contact-viewport-probe {
     position: absolute;
     height: 100svh;
@@ -23,8 +28,7 @@ const CSS = `
   #contact {
     --contact-cut: clamp(32px, 6vw, 88px);
     --contact-gutter: 9rem;
-    position: sticky;
-    top: 0;
+    position: relative;
     height: auto;
     overflow: visible;
     isolation: isolate;
@@ -49,6 +53,7 @@ const CSS = `
     margin: 0;
     overflow: hidden;
     clip-path: inset(100% 0 0);
+    opacity: 0;
     pointer-events: none;
     user-select: none;
   }
@@ -184,8 +189,10 @@ const CSS = `
   }
 `;
 
-export default function Contact() {
+export default function Contact({ children }) {
   const trackRef = useRef(null);
+  const panelRef = useRef(null);
+  const leadInRef = useRef(null);
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const carRef = useRef(null);
@@ -194,6 +201,8 @@ export default function Contact() {
 
   useLayoutEffect(() => {
     const track = trackRef.current;
+    const panel = panelRef.current;
+    const leadIn = leadInRef.current;
     const section = sectionRef.current;
     const content = contentRef.current;
     const car = carRef.current;
@@ -208,17 +217,22 @@ export default function Contact() {
     function update() {
       frame = 0;
       if (!metrics || preference.matches) return;
-      const { baseHeight, growth, viewportHeight, resistance, travel } = metrics;
+      const { baseHeight, leadInHeight, viewportHeight, resistance, travel } = metrics;
       // Start the pause when the original bottom edge reaches the viewport bottom.
-      const distance = viewportHeight - track.getBoundingClientRect().top - baseHeight;
+      const distance = viewportHeight - track.getBoundingClientRect().top - leadInHeight - baseHeight;
       const progress = Math.max(0, Math.min(1, (distance - resistance) / travel));
       if (progress === previousProgress) return;
       previousProgress = progress;
-      const eased = progress * progress * (3 - 2 * progress);
-      const height = baseHeight + growth * eased;
-      section.style.height = `${height}px`;
-      section.style.top = `${viewportHeight - height}px`;
-      car.style.clipPath = `inset(${(1 - eased) * 100}% 0 0)`;
+      // Finish most of the natural scroll before drawing the car. Ease-out
+      // makes the wheels arrive quickly, then settles gently at the wing.
+      const reveal = Math.max(0, Math.min(1, (progress - 0.75) / 0.25));
+      const eased = 1 - (1 - reveal) ** 3;
+      const edge = eased * 108;
+      const mask = `linear-gradient(to top, #000 ${Math.max(0, edge - 8)}%, transparent ${edge}%)`;
+      car.style.clipPath = `inset(${Math.max(0, 100 - edge)}% 0 0)`;
+      car.style.maskImage = mask;
+      car.style.webkitMaskImage = mask;
+      car.style.opacity = `${Math.min(1, eased * 4)}`;
     }
 
     function scheduleUpdate() {
@@ -230,46 +244,57 @@ export default function Contact() {
       const viewportHeight = viewportRef.current.offsetHeight;
       const navHeight = document.querySelector(".site-nav")?.offsetHeight ?? 56;
       const baseHeight = content.getBoundingClientRect().height;
+      const leadInHeight = leadIn.getBoundingClientRect().height;
       context.font = `100px ${getComputedStyle(art).fontFamily}`;
       const glyphWidth = context.measureText("@").width / 100;
-      const fontSize = car.clientWidth / (CAR_COLUMNS * (glyphWidth + CAR_LETTER_SPACING));
+      const fontSize = car.clientWidth * 0.92 / (CAR_COLUMNS * (glyphWidth + CAR_LETTER_SPACING));
       art.style.fontSize = `${fontSize}px`;
       const carHeight = CAR_ROWS * fontSize * CAR_LINE_HEIGHT;
       // Allow taller content in short viewports rather than cover the contact links.
       const fullHeight = Math.max(viewportHeight - navHeight, baseHeight + carHeight + 16);
       const growth = fullHeight - baseHeight;
-      const resistance = Math.min(120, viewportHeight * 0.12);
-      const travel = growth * 1.5;
-      metrics = { baseHeight, growth, viewportHeight, resistance, travel };
+      const resistance = Math.min(72, viewportHeight * 0.08);
+      const travel = growth;
+      metrics = { baseHeight, leadInHeight, viewportHeight, resistance, travel };
       previousProgress = -1;
+      section.style.height = `${fullHeight}px`;
 
       if (preference.matches) {
-        track.style.height = `${fullHeight}px`;
-        section.style.position = "relative";
-        section.style.top = "0px";
-        section.style.height = `${fullHeight}px`;
+        track.style.height = `${leadInHeight + fullHeight}px`;
+        panel.style.position = "relative";
+        panel.style.top = "0px";
         car.style.clipPath = "none";
+        car.style.maskImage = "none";
+        car.style.webkitMaskImage = "none";
+        car.style.opacity = "1";
       } else {
-        // A fixed runway avoids scroll-height feedback as the panel expands.
-        track.style.height = `${baseHeight + resistance + travel}px`;
-        section.style.position = "sticky";
+        // Pin Skills and Contact together only for the short pause. Their
+        // shared boundary never separates. After that, native scrolling
+        // exposes the rest of Contact without resizing or translating it.
+        track.style.height = `${leadInHeight + fullHeight + resistance}px`;
+        panel.style.position = "sticky";
+        panel.style.top = `${viewportHeight - leadInHeight - baseHeight}px`;
         update();
       }
     }
 
     let observedWidth;
     let observedContentHeight;
+    let observedLeadInHeight;
     const observer = new ResizeObserver(() => {
       const width = track.clientWidth;
       const height = content.getBoundingClientRect().height;
-      if (width !== observedWidth || height !== observedContentHeight) {
+      const leadInHeight = leadIn.getBoundingClientRect().height;
+      if (width !== observedWidth || height !== observedContentHeight || leadInHeight !== observedLeadInHeight) {
         observedWidth = width;
         observedContentHeight = height;
+        observedLeadInHeight = leadInHeight;
         measure();
       }
     });
     observer.observe(track);
     observer.observe(content);
+    observer.observe(leadIn);
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", measure);
     preference.addEventListener("change", measure);
@@ -290,29 +315,32 @@ export default function Contact() {
       <style>{CSS}</style>
       <div className="contact-scroll-track" ref={trackRef}>
         <span className="contact-viewport-probe" ref={viewportRef} aria-hidden="true" />
-        <section id="contact" ref={sectionRef} aria-labelledby="contact-title">
-          <div className="contact-content" ref={contentRef}>
-            <h2 id="contact-title" className="contact-label">Let's Get in Touch</h2>
-            <hr className="contact-divider" />
-            <div className="contact-tiles-wrapper">
-              <div className="contact-tiles">
-                {TILES.map(({ label, value, href }) => (
-                  <a key={label} className="contact-tile" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-                    <span className="ct-br ct-br-tl" />
-                    <span className="ct-br ct-br-tr" />
-                    <span className="ct-br ct-br-bl" />
-                    <span className="ct-br ct-br-br" />
-                    <span className="contact-tile-label">{label}</span>
-                    <span className="contact-tile-value">{value}</span>
-                  </a>
-                ))}
+        <div className="contact-scroll-panel" ref={panelRef}>
+          <div ref={leadInRef}>{children}</div>
+          <section id="contact" ref={sectionRef} aria-labelledby="contact-title">
+            <div className="contact-content" ref={contentRef}>
+              <h2 id="contact-title" className="contact-label">Let's Get in Touch</h2>
+              <hr className="contact-divider" />
+              <div className="contact-tiles-wrapper">
+                <div className="contact-tiles">
+                  {TILES.map(({ label, value, href }) => (
+                    <a key={label} className="contact-tile" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                      <span className="ct-br ct-br-tl" />
+                      <span className="ct-br ct-br-tr" />
+                      <span className="ct-br ct-br-bl" />
+                      <span className="ct-br ct-br-br" />
+                      <span className="contact-tile-label">{label}</span>
+                      <span className="contact-tile-value">{value}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <figure className="contact-car" ref={carRef} aria-hidden="true">
-            <pre ref={artRef}>{fsaeCar}</pre>
-          </figure>
-        </section>
+            <figure className="contact-car" ref={carRef} aria-hidden="true">
+              <pre ref={artRef}>{fsaeCar}</pre>
+            </figure>
+          </section>
+        </div>
       </div>
     </>
   );
