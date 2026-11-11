@@ -36,9 +36,8 @@ export default function Home() {
       </div>
       <Experience />
       <Projects />
-      <Contact>
-        <Skills />
-      </Contact>
+      <Skills />
+      <Contact />
     </main>
   );
 }

@@ -11,3 +11,8 @@
   font-size: clamp(0.6rem, 2.5vw, 0.7rem);
   letter-spacing: 0.04em;
 }
+
+/* Contact draws the shared edge while pinned, including during the car reveal. */
+main:has(.contact-scroll-track) + .site-footer {
+  border-top: 0;
+}
