@@ -139,6 +139,12 @@ const CSS = `
     display: block;
   }
 
+  @media (min-width: 1101px) {
+    .about-photo-col {
+      margin-block: 1.5rem;
+    }
+  }
+
   @media (max-width: 1100px) {
     .about-inner {
       flex-direction: column;
