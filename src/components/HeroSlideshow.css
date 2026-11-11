@@ -32,7 +32,6 @@
 .hero-pause:hover { border-color: #a19d96; color: #e0d8cc; }
 .hero-pause:focus-visible { outline: 2px solid #e2dfd8; outline-offset: 4px; }
 .hero-slide-progress { position: relative; display: flex; align-items: center; gap: 0.9rem; padding: 0.65rem 0.85rem; margin: 0; isolation: isolate; }
-.hero-slide-progress::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #1c1c1c; transform: translateY(-50%); z-index: -1; }
 .hero-progress-corner { position: absolute; width: 8px; height: 8px; border: solid #383838; pointer-events: none; }
 .hero-progress-corner.top-left { top: 0; left: 0; border-width: 1px 0 0 1px; }
 .hero-progress-corner.top-right { top: 0; right: 0; border-width: 1px 1px 0 0; }

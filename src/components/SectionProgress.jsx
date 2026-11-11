@@ -18,7 +18,6 @@ const CSS = `
     z-index: 99;
   }
 
-  /* Bracket frame */
   .sp-frame {
     position: relative;
     display: flex;
@@ -28,19 +27,6 @@ const CSS = `
     padding: 0.85rem 0.65rem;
   }
 
-  /* Connecting line behind the dots */
-  .sp-frame::before {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 50%;
-    width: 1px;
-    background: #1c1c1c;
-    transform: translateX(-50%);
-    z-index: -1;
-  }
-
-  /* L-bracket corners */
   .sp-br {
     position: absolute;
     width: 8px;
@@ -48,10 +34,12 @@ const CSS = `
     border-style: solid;
     border-color: #383838;
   }
-  .sp-br-tl { top: 0; left: 0;  border-width: 1px 0 0 1px; }
+  .sp-br-tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
   .sp-br-tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
-  .sp-br-bl { bottom: 0; left: 0;  border-width: 0 0 1px 1px; }
+  .sp-br-bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
   .sp-br-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+  .section-progress.on-light .sp-br { border-color: #726b60; }
 
   .sp-dot {
     width: 6px;
@@ -74,8 +62,6 @@ const CSS = `
     background: #484848;
   }
 
-  .section-progress.on-light .sp-frame::before { background: #a19a8e; }
-  .section-progress.on-light .sp-br { border-color: #726b60; }
   .section-progress.on-light .sp-dot { background: #938b7e; }
   .section-progress.on-light .sp-dot.active { background: #242424; }
   .section-progress.on-light .sp-dot:hover:not(.active) { background: #514d46; }
