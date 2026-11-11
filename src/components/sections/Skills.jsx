@@ -43,6 +43,7 @@ const CSS = `
 
   /* ── Section header (matches Projects) ───────── */
   .skills-label {
+    line-height: 1.1;
     font-size: clamp(2.2rem, 4.5vw, 4rem);
     font-weight: 700;
     letter-spacing: -0.02em;

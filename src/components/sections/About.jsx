@@ -37,7 +37,7 @@ const CSS = `
     letter-spacing: -0.03em;
     color: #f0ece4;
     margin: 0;
-    line-height: 1.05;
+    line-height: 1.1;
     text-shadow:
        6px 2px 8px rgba(255, 210, 0, 0.55),
       -6px -2px 8px rgba(30, 100, 255, 0.55);
@@ -62,7 +62,8 @@ const CSS = `
     height: 1px;
     background: #1c1c1c;
     border: none;
-    margin: 0.3rem 0;
+    /* Account for the text column's 1.4rem flex gap above the divider. */
+    margin: -0.4rem 0 0.3rem;
   }
 
   .about-bio {

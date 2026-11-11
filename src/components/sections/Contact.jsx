@@ -1,4 +1,5 @@
-
+import { useLayoutEffect, useRef } from "react";
+import fsaeCar, { CAR_COLUMNS, CAR_ROWS, CAR_LETTER_SPACING, CAR_LINE_HEIGHT } from "../../data/fsaeCar";
 // TODO: fill in your actual contact details
 const TILES = [
   { label: "Email",    value: "bryanz4@illinois.edu",        href: "mailto:bryanz4@illinois.edu" },
@@ -7,15 +8,63 @@ const TILES = [
 ];
 
 const CSS = `
+  .contact-scroll-track {
+    position: relative;
+  }
+
+  .contact-viewport-probe {
+    position: absolute;
+    height: 100svh;
+    width: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   #contact {
     --contact-cut: clamp(32px, 6vw, 88px);
+    --contact-gutter: 9rem;
+    position: sticky;
+    top: 0;
     height: auto;
     overflow: visible;
     isolation: isolate;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    padding: 3rem 9rem 2.5rem;
+    padding: 0;
+  }
+
+  .contact-content {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 4rem var(--contact-gutter) 2.5rem;
+  }
+
+  .contact-car {
+    position: absolute;
+    bottom: 3px;
+    left: var(--contact-gutter);
+    right: var(--contact-gutter);
+    margin: 0;
+    overflow: hidden;
+    clip-path: inset(100% 0 0);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .contact-car pre {
+    width: max-content;
+    margin: 0 auto;
+    color: #242424;
+    font-family: 'B612 Mono', 'Courier New', monospace;
+    font-weight: 400;
+    font-size: 1px;
+    font-variant-ligatures: none;
+    font-kerning: none;
+    white-space: pre;
+    letter-spacing: ${CAR_LETTER_SPACING}em;
+    line-height: ${CAR_LINE_HEIGHT};
   }
 
   #contact::before {
@@ -41,6 +90,7 @@ const CSS = `
 
   /* ── Header (matches Projects / Skills) ───────── */
   .contact-label {
+    line-height: 1.1;
     font-size: clamp(2.2rem, 4.5vw, 4rem);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -121,8 +171,7 @@ const CSS = `
 
   @media (max-width: 768px) {
     #contact {
-      padding: 2.5rem 1.5rem;
-      height: auto;
+      --contact-gutter: 1.5rem;
     }
     .contact-tiles {
       flex-direction: column;
@@ -136,30 +185,135 @@ const CSS = `
 `;
 
 export default function Contact() {
+  const trackRef = useRef(null);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const carRef = useRef(null);
+  const artRef = useRef(null);
+  const viewportRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    const section = sectionRef.current;
+    const content = contentRef.current;
+    const car = carRef.current;
+    const art = artRef.current;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const context = document.createElement("canvas").getContext("2d");
+    let metrics;
+    let frame = 0;
+    let disposed = false;
+    let previousProgress = -1;
+
+    function update() {
+      frame = 0;
+      if (!metrics || preference.matches) return;
+      const { baseHeight, growth, viewportHeight, resistance, travel } = metrics;
+      // Start the pause when the original bottom edge reaches the viewport bottom.
+      const distance = viewportHeight - track.getBoundingClientRect().top - baseHeight;
+      const progress = Math.max(0, Math.min(1, (distance - resistance) / travel));
+      if (progress === previousProgress) return;
+      previousProgress = progress;
+      const eased = progress * progress * (3 - 2 * progress);
+      const height = baseHeight + growth * eased;
+      section.style.height = `${height}px`;
+      section.style.top = `${viewportHeight - height}px`;
+      car.style.clipPath = `inset(${(1 - eased) * 100}% 0 0)`;
+    }
+
+    function scheduleUpdate() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+
+    function measure() {
+      if (disposed) return;
+      const viewportHeight = viewportRef.current.offsetHeight;
+      const navHeight = document.querySelector(".site-nav")?.offsetHeight ?? 56;
+      const baseHeight = content.getBoundingClientRect().height;
+      context.font = `100px ${getComputedStyle(art).fontFamily}`;
+      const glyphWidth = context.measureText("@").width / 100;
+      const fontSize = car.clientWidth / (CAR_COLUMNS * (glyphWidth + CAR_LETTER_SPACING));
+      art.style.fontSize = `${fontSize}px`;
+      const carHeight = CAR_ROWS * fontSize * CAR_LINE_HEIGHT;
+      // Allow taller content in short viewports rather than cover the contact links.
+      const fullHeight = Math.max(viewportHeight - navHeight, baseHeight + carHeight + 16);
+      const growth = fullHeight - baseHeight;
+      const resistance = Math.min(120, viewportHeight * 0.12);
+      const travel = growth * 1.5;
+      metrics = { baseHeight, growth, viewportHeight, resistance, travel };
+      previousProgress = -1;
+
+      if (preference.matches) {
+        track.style.height = `${fullHeight}px`;
+        section.style.position = "relative";
+        section.style.top = "0px";
+        section.style.height = `${fullHeight}px`;
+        car.style.clipPath = "none";
+      } else {
+        // A fixed runway avoids scroll-height feedback as the panel expands.
+        track.style.height = `${baseHeight + resistance + travel}px`;
+        section.style.position = "sticky";
+        update();
+      }
+    }
+
+    let observedWidth;
+    let observedContentHeight;
+    const observer = new ResizeObserver(() => {
+      const width = track.clientWidth;
+      const height = content.getBoundingClientRect().height;
+      if (width !== observedWidth || height !== observedContentHeight) {
+        observedWidth = width;
+        observedContentHeight = height;
+        measure();
+      }
+    });
+    observer.observe(track);
+    observer.observe(content);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", measure);
+    preference.addEventListener("change", measure);
+    measure();
+    document.fonts.ready.then(measure);
+    return () => {
+      disposed = true;
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", measure);
+      preference.removeEventListener("change", measure);
+    };
+  }, []);
+
   return (
     <>
       <style>{CSS}</style>
-      <section id="contact">
-
-        <h2 className="contact-label">Let's Get in Touch</h2>
-        <hr className="contact-divider" />
-
-        <div className="contact-tiles-wrapper">
-        <div className="contact-tiles">
-          {TILES.map(({ label, value, href }) => (
-            <a key={label} className="contact-tile" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-              <span className="ct-br ct-br-tl" />
-              <span className="ct-br ct-br-tr" />
-              <span className="ct-br ct-br-bl" />
-              <span className="ct-br ct-br-br" />
-              <span className="contact-tile-label">{label}</span>
-              <span className="contact-tile-value">{value}</span>
-            </a>
-          ))}
-        </div>
-        </div>
-
-      </section>
+      <div className="contact-scroll-track" ref={trackRef}>
+        <span className="contact-viewport-probe" ref={viewportRef} aria-hidden="true" />
+        <section id="contact" ref={sectionRef} aria-labelledby="contact-title">
+          <div className="contact-content" ref={contentRef}>
+            <h2 id="contact-title" className="contact-label">Let's Get in Touch</h2>
+            <hr className="contact-divider" />
+            <div className="contact-tiles-wrapper">
+              <div className="contact-tiles">
+                {TILES.map(({ label, value, href }) => (
+                  <a key={label} className="contact-tile" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                    <span className="ct-br ct-br-tl" />
+                    <span className="ct-br ct-br-tr" />
+                    <span className="ct-br ct-br-bl" />
+                    <span className="ct-br ct-br-br" />
+                    <span className="contact-tile-label">{label}</span>
+                    <span className="contact-tile-value">{value}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+          <figure className="contact-car" ref={carRef} aria-hidden="true">
+            <pre ref={artRef}>{fsaeCar}</pre>
+          </figure>
+        </section>
+      </div>
     </>
   );
 }
