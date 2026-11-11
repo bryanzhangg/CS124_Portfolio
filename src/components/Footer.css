@@ -13,6 +13,7 @@
 }
 
 /* Contact draws the shared edge while pinned, including during the car reveal. */
-main:has(.contact-scroll-track) + .site-footer {
+.contact-ending > .site-footer {
   border-top: 0;
+  flex-shrink: 0;
 }

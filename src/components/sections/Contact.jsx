@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import Footer from "../Footer";
 import fsaeCar, { CAR_COLUMNS, CAR_ROWS, CAR_LETTER_SPACING, CAR_LINE_HEIGHT } from "../../data/fsaeCar";
 // TODO: fill in your actual contact details
 const TILES = [
@@ -12,18 +13,10 @@ const CSS = `
     position: relative;
   }
 
-  html.contact-bottom-stop {
-    scroll-snap-type: y proximity;
-  }
-
-  .contact-original-end {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    pointer-events: none;
-    scroll-snap-align: end;
-    scroll-snap-stop: always;
+  .contact-ending {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
   }
 
   .contact-viewport-probe {
@@ -37,13 +30,14 @@ const CSS = `
   #contact {
     --contact-cut: clamp(32px, 6vw, 88px);
     --contact-gutter: 9rem;
-    position: sticky;
+    position: relative;
     height: auto;
     overflow: visible;
     isolation: isolate;
     z-index: 1;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     padding: 0;
   }
 
@@ -51,7 +45,7 @@ const CSS = `
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    padding: 4rem var(--contact-gutter) 2.5rem;
+    padding: clamp(1.5rem, 7dvh, 4rem) var(--contact-gutter) clamp(1rem, 4dvh, 2.5rem);
   }
 
   .contact-car {
@@ -210,7 +204,7 @@ const CSS = `
 
 export default function Contact() {
   const trackRef = useRef(null);
-  const originalEndRef = useRef(null);
+  const endingRef = useRef(null);
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const carRef = useRef(null);
@@ -219,7 +213,8 @@ export default function Contact() {
 
   useLayoutEffect(() => {
     const track = trackRef.current;
-    const originalEnd = originalEndRef.current;
+    const ending = endingRef.current;
+    const footer = ending.querySelector(".site-footer");
     const section = sectionRef.current;
     const content = contentRef.current;
     const car = carRef.current;
@@ -232,24 +227,34 @@ export default function Contact() {
     let previousProgress = -1;
     let pauseConsumed = false;
     let holdUntil = 0;
+    let holdY = 0;
+    let previousY = window.scrollY;
     let touchY = null;
 
+    function beginPause(y) {
+      pauseConsumed = true;
+      holdY = y;
+      holdUntil = performance.now() + 360;
+      window.scrollTo({ top: y, behavior: "instant" });
+    }
+
     function stopAtOriginalEnd(event, delta) {
-      if (!metrics || preference.matches || delta <= 0) return;
+      if (!metrics || preference.matches) return;
+      if (delta < 0) {
+        holdUntil = 0;
+        return;
+      }
+      if (delta === 0) return;
       if (performance.now() < holdUntil) {
         if (event.cancelable) event.preventDefault();
         return;
       }
       if (pauseConsumed) return;
       const remaining = track.getBoundingClientRect().top + metrics.baseHeight - metrics.viewportHeight;
-      // Large wheel steps can jump over a proximity snap in short viewports.
-      // Clamp that one crossing, without moving or resizing any page elements.
+      // Freeze the whole viewport briefly, without pinning any earlier section.
       if (remaining >= 0 && delta >= remaining && event.cancelable) {
         event.preventDefault();
-        pauseConsumed = true;
-        holdUntil = performance.now() + 140;
-        document.documentElement.classList.remove("contact-bottom-stop");
-        window.scrollTo({ top: window.scrollY + remaining, behavior: "instant" });
+        beginPause(window.scrollY + remaining);
       }
     }
 
@@ -271,38 +276,44 @@ export default function Contact() {
       stopAtOriginalEnd(event, delta);
     }
 
-    function finishOriginalStop() {
-      if (!metrics) return;
-      const distance = metrics.viewportHeight - track.getBoundingClientRect().top - metrics.baseHeight;
-      if (Math.abs(distance) <= 2 || distance > metrics.viewportHeight * 0.35) {
-        // Snap only once on the way down, then let small wheel/touch gestures
-        // advance normally instead of repeatedly snapping back to this point.
-        pauseConsumed = true;
-        document.documentElement.classList.remove("contact-bottom-stop");
-      }
+    function onKeyDown(event) {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey ||
+          event.target.closest?.('input, textarea, select, button, [contenteditable="true"]')) return;
+      const page = metrics?.viewportHeight ?? window.innerHeight;
+      const delta = event.key === "ArrowDown" ? 40
+        : event.key === "PageDown" || (event.key === " " && !event.shiftKey) ? page * 0.9
+        : event.key === "End" ? Infinity
+        : ["ArrowUp", "PageUp", "Home"].includes(event.key) || (event.key === " " && event.shiftKey) ? -1 : 0;
+      stopAtOriginalEnd(event, delta);
     }
 
     function update() {
       frame = 0;
       if (!metrics || preference.matches) return;
       const { baseHeight, growth, viewportHeight, revealTravel } = metrics;
-      const distance = viewportHeight - track.getBoundingClientRect().top - baseHeight;
+      const stopY = window.scrollY + track.getBoundingClientRect().top + baseHeight - viewportHeight;
+      // Catch touch inertia and scrollbar/keyboard crossings as well as wheels.
+      if (!pauseConsumed && previousY < stopY && window.scrollY >= stopY) beginPause(stopY);
+      if (performance.now() < holdUntil && window.scrollY > holdY) {
+        window.scrollTo({ top: holdY, behavior: "instant" });
+      }
+      previousY = window.scrollY;
+      const distance = window.scrollY - stopY;
       if (pauseConsumed && distance < -viewportHeight * 0.6) {
         pauseConsumed = false;
-        document.documentElement.classList.add("contact-bottom-stop");
       }
       // Contact scrolls normally to its full height before any drawing starts.
       // Only the final reveal has a sticky runway; earlier sections stay put.
       const progress = Math.max(0, Math.min(1, (distance - growth) / revealTravel));
       if (progress === previousProgress) return;
       previousProgress = progress;
-      const eased = 1 - (1 - progress) ** 3;
+      const eased = 1 - (1 - progress) ** 2;
       const edge = eased * 108;
       const mask = `linear-gradient(to top, #000 ${Math.max(0, edge - 8)}%, transparent ${edge}%)`;
       car.style.clipPath = `inset(${Math.max(0, 100 - edge)}% 0 0)`;
       car.style.maskImage = mask;
       car.style.webkitMaskImage = mask;
-      car.style.opacity = `${Math.min(1, eased * 4)}`;
+      car.style.opacity = `${Math.min(1, eased * 1.2)}`;
     }
 
     function scheduleUpdate() {
@@ -314,40 +325,41 @@ export default function Contact() {
       const viewportHeight = viewportRef.current.offsetHeight;
       const navHeight = document.querySelector(".site-nav")?.getBoundingClientRect().height ?? 56;
       const fullHeight = Math.max(1, viewportHeight - navHeight);
+      const footerHeight = footer.getBoundingClientRect().height;
+      const contactHeight = Math.max(1, fullHeight - footerHeight);
       const naturalContentHeight = content.getBoundingClientRect().height;
-      const baseHeight = Math.min(naturalContentHeight, fullHeight);
+      const baseContactHeight = Math.min(naturalContentHeight, contactHeight);
+      const baseHeight = baseContactHeight + footerHeight;
       context.font = `100px ${getComputedStyle(art).fontFamily}`;
       const glyphWidth = context.measureText("@").width / 100;
       const widthFontSize = car.clientWidth * 0.92 / (CAR_COLUMNS * (glyphWidth + CAR_LETTER_SPACING));
-      const carSpace = Math.max(0, fullHeight - baseHeight - 16);
+      const carSpace = Math.max(0, contactHeight - baseContactHeight - 16);
       // Fit both axes proportionally instead of making Contact taller than
       // the space below the navbar on short or wide displays.
       const fontSize = Math.min(widthFontSize, carSpace / (CAR_ROWS * CAR_LINE_HEIGHT));
       art.style.fontSize = `${fontSize}px`;
       const growth = fullHeight - baseHeight;
-      const revealTravel = Math.max(240, Math.min(480, viewportHeight * 0.45));
+      const revealTravel = Math.max(480, Math.min(900, viewportHeight * 0.9));
       metrics = { baseHeight, growth, viewportHeight, revealTravel };
       previousProgress = -1;
-      section.style.height = `${fullHeight}px`;
+      ending.style.height = `${fullHeight}px`;
+      section.style.height = `${contactHeight}px`;
       // Keep links accessible even when zoom or a very short display makes
       // the contact text itself taller than the available page height.
-      section.style.overflowY = naturalContentHeight > fullHeight ? "auto" : "visible";
-      originalEnd.style.height = `${baseHeight}px`;
+      section.style.overflowY = naturalContentHeight > contactHeight ? "auto" : "visible";
 
       if (preference.matches) {
-        document.documentElement.classList.remove("contact-bottom-stop");
         track.style.height = `${fullHeight}px`;
-        section.style.position = "relative";
-        section.style.top = "0px";
+        ending.style.position = "relative";
+        ending.style.top = "0px";
         car.style.clipPath = "none";
         car.style.maskImage = "none";
         car.style.webkitMaskImage = "none";
         car.style.opacity = "1";
       } else {
-        document.documentElement.classList.toggle("contact-bottom-stop", !pauseConsumed);
         track.style.height = `${fullHeight + revealTravel}px`;
-        section.style.position = "sticky";
-        section.style.top = `${navHeight}px`;
+        ending.style.position = "sticky";
+        ending.style.top = `${navHeight}px`;
         update();
       }
     }
@@ -355,22 +367,26 @@ export default function Contact() {
     let observedWidth;
     let observedContentHeight;
     let observedViewportHeight;
+    let observedFooterHeight;
     const observer = new ResizeObserver(() => {
       const width = track.clientWidth;
       const height = content.getBoundingClientRect().height;
       const viewportHeight = viewportRef.current.offsetHeight;
-      if (width !== observedWidth || height !== observedContentHeight || viewportHeight !== observedViewportHeight) {
+      const footerHeight = footer.getBoundingClientRect().height;
+      if (width !== observedWidth || height !== observedContentHeight || viewportHeight !== observedViewportHeight || footerHeight !== observedFooterHeight) {
         observedWidth = width;
         observedContentHeight = height;
         observedViewportHeight = viewportHeight;
+        observedFooterHeight = footerHeight;
         measure();
       }
     });
     observer.observe(track);
     observer.observe(content);
     observer.observe(viewportRef.current);
+    observer.observe(footer);
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("scrollend", finishOriginalStop);
+    window.addEventListener("keydown", onKeyDown);
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: false });
@@ -383,11 +399,10 @@ export default function Contact() {
       cancelAnimationFrame(frame);
       observer.disconnect();
       window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("scrollend", finishOriginalStop);
+      window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
-      document.documentElement.classList.remove("contact-bottom-stop");
       window.removeEventListener("resize", measure);
       preference.removeEventListener("change", measure);
     };
@@ -398,31 +413,33 @@ export default function Contact() {
       <style>{CSS}</style>
       <div className="contact-scroll-track" ref={trackRef}>
         <span className="contact-viewport-probe" ref={viewportRef} aria-hidden="true" />
-        <span className="contact-original-end" ref={originalEndRef} aria-hidden="true" />
-        <section id="contact" ref={sectionRef} aria-labelledby="contact-title">
-          <div className="contact-content" ref={contentRef}>
-            <h2 id="contact-title" className="contact-label">Let's Get in Touch</h2>
-            <hr className="contact-divider" />
-            <div className="contact-tiles-wrapper">
-              <div className="contact-tiles">
-                {TILES.map(({ label, value, href }) => (
-                  <a key={label} className="contact-tile" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-                    <span className="ct-br ct-br-tl" />
-                    <span className="ct-br ct-br-tr" />
-                    <span className="ct-br ct-br-bl" />
-                    <span className="ct-br ct-br-br" />
-                    <span className="contact-tile-label">{label}</span>
-                    <span className="contact-tile-value">{value}</span>
-                  </a>
-                ))}
+        <div className="contact-ending" ref={endingRef}>
+          <section id="contact" ref={sectionRef} aria-labelledby="contact-title">
+            <div className="contact-content" ref={contentRef}>
+              <h2 id="contact-title" className="contact-label">Let's Get in Touch</h2>
+              <hr className="contact-divider" />
+              <div className="contact-tiles-wrapper">
+                <div className="contact-tiles">
+                  {TILES.map(({ label, value, href }) => (
+                    <a key={label} className="contact-tile" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                      <span className="ct-br ct-br-tl" />
+                      <span className="ct-br ct-br-tr" />
+                      <span className="ct-br ct-br-bl" />
+                      <span className="ct-br ct-br-br" />
+                      <span className="contact-tile-label">{label}</span>
+                      <span className="contact-tile-value">{value}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <figure className="contact-car" ref={carRef} aria-hidden="true">
-            <pre ref={artRef}>{fsaeCar}</pre>
-          </figure>
-          <div className="contact-footer-divider" aria-hidden="true" />
-        </section>
+            <figure className="contact-car" ref={carRef} aria-hidden="true">
+              <pre ref={artRef}>{fsaeCar}</pre>
+            </figure>
+            <div className="contact-footer-divider" aria-hidden="true" />
+          </section>
+          <Footer />
+        </div>
       </div>
     </>
   );

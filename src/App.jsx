@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import ErrorPage from "./pages/ErrorPage";
 
 export default function App() {
+  const { pathname } = useLocation();
   return (
     <>
       <ErrorBoundary>
@@ -17,7 +18,7 @@ export default function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </ErrorBoundary>
-      <Footer />
+      {pathname !== "/" && <Footer />}
     </>
   );
 }
