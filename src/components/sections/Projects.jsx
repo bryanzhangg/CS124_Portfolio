@@ -101,17 +101,15 @@ const CSS = `
     max-width: calc(100% - 1.5rem);
     box-sizing: border-box;
     padding: 0.65rem 0.85rem;
-    background: rgba(64,64,64,0.62);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
   }
 
   .project-card-title {
     font-family: var(--font-title);
-    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-size: clamp(1rem, 1.35vw, 1.25rem);
     font-weight: 600;
     line-height: 1.3;
     color: #e2dfd8;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
     margin: 0;
     letter-spacing: 0.045em;
     text-transform: uppercase;
