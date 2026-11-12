@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProjectCard from "../ProjectCard";
+import ExpandableContent from "../ExpandableContent";
 import projects from "../../data/projects";
 
 
@@ -48,6 +49,10 @@ const CSS = `
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
     overflow: visible;
+  }
+
+  .projects-extra .projects-grid {
+    padding-top: 1rem;
   }
 
   /* Half-width cards; center an unpaired final card without resizing it. */
@@ -212,6 +217,9 @@ const CSS = `
       overflow: visible;
       gap: 1.5rem;
     }
+    .projects-extra .projects-grid {
+      padding-top: 1.5rem;
+    }
     .projects-grid > .project-card,
     .projects-grid > .project-card:last-child:nth-child(odd) {
       grid-column: 1;
@@ -225,7 +233,6 @@ const CSS = `
 
 export default function Projects() {
   const [expanded, setExpanded] = useState(false);
-  const visibleProjects = expanded ? projects : projects.slice(0, 4);
 
   return (
     <>
@@ -238,15 +245,24 @@ export default function Projects() {
           <hr className="projects-divider" />
 
           <div className="projects-grid" id="projects-grid">
-            {visibleProjects.map((project) => (
+            {projects.slice(0, 4).map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
           {projects.length > 4 && (
+            <ExpandableContent expanded={expanded} id="projects-extra" className="projects-extra">
+              <div className="projects-grid">
+                {projects.slice(4).map((project) => (
+                  <ProjectCard key={project.slug} project={project} />
+                ))}
+              </div>
+            </ExpandableContent>
+          )}
+          {projects.length > 4 && (
             <button
               className="projects-more"
               aria-expanded={expanded}
-              aria-controls="projects-grid"
+              aria-controls="projects-extra"
               onClick={() => setExpanded(!expanded)}
             >
               {expanded ? "View less" : "View more"}

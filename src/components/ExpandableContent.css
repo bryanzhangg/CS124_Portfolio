@@ -1,0 +1,29 @@
+.expandable-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 480ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease;
+}
+
+.expandable-content.is-expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.expandable-content-inner {
+  min-height: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.is-expanded > .expandable-content-inner {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expandable-content,
+  .expandable-content-inner {
+    transition: none;
+  }
+}

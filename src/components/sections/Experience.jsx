@@ -1,10 +1,38 @@
 import { useState } from "react";
 import experience from "../../data/experience";
+import ExpandableContent from "../ExpandableContent";
 import "./Experience.css";
 
 export default function Experience() {
   const [expanded, setExpanded] = useState(false);
-  const visibleExperience = expanded ? experience : experience.slice(0, 3);
+  const renderEntry = ({ id, period, role, organization, logo, description, highlights = [], tags = [] }, index) => (
+    <li key={id} className="experience-entry">
+      <div className="experience-date">
+        <span className="experience-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+        <span>{period}</span>
+      </div>
+      <span className="experience-node" aria-hidden="true">
+        {logo && <img src={logo} alt="" loading="lazy" />}
+      </span>
+      <article className="experience-card">
+        <span className="experience-corner experience-corner-tr" aria-hidden="true" />
+        <span className="experience-corner experience-corner-bl" aria-hidden="true" />
+        <span className="experience-organization">{organization}</span>
+        <h3>{role}</h3>
+        {description && <p className="experience-description">{description}</p>}
+        {highlights.length > 0 && (
+          <ul className="experience-highlights">
+            {highlights.map((highlight, i) => <li key={i}>{highlight}</li>)}
+          </ul>
+        )}
+        {tags.length > 0 && (
+          <ul className="experience-tags" aria-label="Skills and tools">
+            {tags.map((tag, i) => <li key={i}>{tag}</li>)}
+          </ul>
+        )}
+      </article>
+    </li>
+  );
 
   return (
     <section id="experience" className="experience-section" aria-labelledby="experience-title">
@@ -14,34 +42,16 @@ export default function Experience() {
       </div>
 
       <ol className="experience-timeline" id="experience-timeline">
-        {visibleExperience.map(({ id, period, role, organization, logo, description, highlights = [], tags = [] }, index) => (
-          <li key={id} className="experience-entry">
-            <div className="experience-date">
-              <span className="experience-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <span>{period}</span>
-            </div>
-            <span className="experience-node" aria-hidden="true">
-              {logo && <img src={logo} alt="" loading="lazy" />}
-            </span>
-            <article className="experience-card">
-              <span className="experience-corner experience-corner-tr" aria-hidden="true" />
-              <span className="experience-corner experience-corner-bl" aria-hidden="true" />
-              <span className="experience-organization">{organization}</span>
-              <h3>{role}</h3>
-              {description && <p className="experience-description">{description}</p>}
-              {highlights.length > 0 && (
-                <ul className="experience-highlights">
-                  {highlights.map((highlight, i) => <li key={i}>{highlight}</li>)}
-                </ul>
-              )}
-              {tags.length > 0 && (
-                <ul className="experience-tags" aria-label="Skills and tools">
-                  {tags.map((tag, i) => <li key={i}>{tag}</li>)}
-                </ul>
-              )}
-            </article>
+        {experience.slice(0, 3).map(renderEntry)}
+        {experience.length > 3 && (
+          <li className="experience-more-entry">
+            <ExpandableContent expanded={expanded} id="experience-extra">
+              <ol className="experience-extra-list" start={4}>
+                {experience.slice(3).map((entry, index) => renderEntry(entry, index + 3))}
+              </ol>
+            </ExpandableContent>
           </li>
-        ))}
+        )}
         {experience.length > 3 && (
           <li className={`experience-expand-entry${expanded ? " is-expanded" : ""}`}>
             <button
@@ -49,7 +59,7 @@ export default function Experience() {
               aria-label={expanded ? "View less" : "View all experiences"}
               title={expanded ? "View less" : "View more"}
               aria-expanded={expanded}
-              aria-controls="experience-timeline"
+              aria-controls="experience-extra"
               onClick={() => setExpanded(value => !value)}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
