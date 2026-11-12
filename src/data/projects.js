@@ -8,7 +8,7 @@ const projects = [
   {
     slug: "project-a220",
     order: 3,
-    title: "CAD Airbus A220-300",
+    title: "CAD AIRBUS A220-300",
     caption: "Airbus A220-300 fully modeled in Siemens NX.",
     image: "/assets/projects/project-a220.png",
     gallery: ["/assets/projects/project-a220.png", "/assets/projects/a220_render_1.png", "/assets/projects/a220_render_2.png"],
@@ -19,18 +19,18 @@ const projects = [
   {
     slug: "project-2027dash",
     order: 1,
-    title: "FSAE EV Dash PCB",
-    caption: "Currently designing the 6-layer high speed 2027 custom Dash PCB for our FSAE EV team",
+    title: "FSAE EV DASH PCB",
+    caption: "Currently designing the 6-layer high speed 2027 custom Dash PCB for our FSAE EV team.",
     image: null,
     gallery: [],
-    description: "This project is in progress. Please check back later for updates!",
+    description: "Currently designing the 6-layer high speed 2027 custom Dash PCB for our FSAE EV team. This project is in progress. Please check back later for more updates!",
     tags: ["Schematic Capture", "PCB Layout", "Altium Designer"],
     links: {},
   },
   {
     slug: "project-avbay",
     order: 4,
-    title: "Roll-Controlled Rocket Avionics Bay",
+    title: "ROLL-CONTROLLED ROCKET AVIONICS BAY",
     caption: "Designed the avionics bay that flew on LRI's Control Freak rocket.",
     image: "/assets/projects/project-avbay.png",
     gallery: [],
@@ -41,7 +41,7 @@ const projects = [
   {
     slug: "project-bmp390",
     order: 2,
-    title: "STM32 SPI Driver for BMP390",
+    title: "STM32 SPI DRIVER FOR BMP390",
     caption: "Co-developed the embedded driver for a triple modular redundant BMP390 barometer array",
     image: "/assets/projects/Screenshot 2026-10-18 215504.png",
     gallery: [],
@@ -52,7 +52,7 @@ const projects = [
   {
     slug: "project-habitual",
     order: 5,
-    title: "Habitual: Personal Wellness",
+    title: "HABITUAL: AI PERSONAL WELLNESS APP",
     caption: "Intelligent personal wellness app that uses AI and friends to keep your tasks accountable.",
     image: null,
     gallery: [],
@@ -63,7 +63,7 @@ const projects = [
   {
     slug: "project-wagerly",
     order: 6,
-    title: "Wagerly: Intelligent Prediction Markets",
+    title: "WAGERLY: INTELLIGENT PREDICTION MARKETS",
     caption: "Sports betting platform using intelligent AI analysis to help users make better bets.",
     image: null,
     gallery: [],
