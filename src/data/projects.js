@@ -2,9 +2,12 @@
 // Use plain paths: ["/assets/projects/photo.png"], or objects for captions and alt text:
 // { src: "/assets/projects/photo.png", alt: "Photo description", caption: "Optional caption" }
 // image is the header; an empty gallery displays the header image as a fallback.
+// Give each project a unique integer order: 1 appears first, then 2, etc.
+// The array's written order does not affect the website's card order.
 const projects = [
   {
     slug: "project-a220",
+    order: 3,
     title: "CAD Airbus A220-300",
     caption: "Airbus A220-300 fully modeled in Siemens NX.",
     image: "/assets/projects/project-a220.png",
@@ -14,7 +17,19 @@ const projects = [
     links: {}, // TODO: { github: "...", demo: "..." }
   },
   {
+    slug: "project-2027dash",
+    order: 1,
+    title: "FSAE EV Dash PCB",
+    caption: "Currently designing the 6-layer high speed 2027 custom Dash PCB for our FSAE EV team",
+    image: null,
+    gallery: [],
+    description: "This project is in progress. Please check back later for updates!",
+    tags: ["Schematic Capture", "PCB Layout", "Altium Designer"],
+    links: {},
+  },
+  {
     slug: "project-avbay",
+    order: 4,
     title: "Roll-Controlled Rocket Avionics Bay",
     caption: "Designed the avionics bay that flew on LRI's Control Freak rocket.",
     image: "/assets/projects/project-avbay.png",
@@ -25,6 +40,7 @@ const projects = [
   },
   {
     slug: "project-bmp390",
+    order: 2,
     title: "STM32 SPI Driver for BMP390",
     caption: "Co-developed the embedded driver for a triple modular redundant BMP390 barometer array",
     image: "/assets/projects/Screenshot 2026-10-18 215504.png",
@@ -35,6 +51,7 @@ const projects = [
   },
   {
     slug: "project-habitual",
+    order: 5,
     title: "Habitual: Personal Wellness",
     caption: "Intelligent personal wellness app that uses AI and friends to keep your tasks accountable.",
     image: null,
@@ -45,6 +62,7 @@ const projects = [
   },
   {
     slug: "project-wagerly",
+    order: 6,
     title: "Wagerly: Intelligent Prediction Markets",
     caption: "Sports betting platform using intelligent AI analysis to help users make better bets.",
     image: null,
@@ -55,4 +73,4 @@ const projects = [
   },
 ];
 
-export default projects;
+export default [...projects].sort((a, b) => a.order - b.order);
