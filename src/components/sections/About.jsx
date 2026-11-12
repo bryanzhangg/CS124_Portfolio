@@ -141,7 +141,7 @@ const CSS = `
 
   @media (min-width: 1101px) {
     .about-photo-col {
-      margin-block: 1.5rem;
+      margin-block: 2rem;
     }
   }
 
@@ -199,12 +199,13 @@ export default function About() {
               Currently, I'm particularly passionate about <span style={{color: "#e0d8cc"}}>embedded, autonomy, robotics, and semiconductors. </span>
               Some specific industries I'm currently interested in include <span style={{color: "#e0d8cc"}}>autonomous vehicles, aerospace, and defense.</span></p>
             
-            <p className="about-bio">On campus, I've built and tested avionics equipment for an active roll-controlled rocket, designed a six-layer dashboard PCB for an FSAE EV car, and worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator. Feel free to check out my <span style={{color: "#e0d8cc"}}>past experiences</span> and <span style={{color: "#e0d8cc"}}>projects</span> below to learn more!
+            <p className="about-bio">On campus, I've built and tested avionics equipment for an active roll-controlled rocket, designed a six-layer high speed dashboard PCB for an FSAE EV car, and worked extensively with a <span style={{color: "#e0d8cc"}}>Sequoia-backed startup</span> to help them build an end-to-end LLM pipeline demonstrator. Feel free to check out my <span style={{color: "#e0d8cc"}}>past experiences</span> and <span style={{color: "#e0d8cc"}}>projects</span> below to learn more!
             </p>
 
             <div className="about-tags">
-              <span className="about-tag">ENGINEERING</span>
-              <span className="about-tag">PROGRAMMING</span>
+              <span className="about-tag">ELECTRONICS</span>
+              <span className="about-tag">SOFTWARE</span>
+              <span className="about-tag">CAD</span>
               <span className="about-tag">U.S. CITIZEN</span>
             </div>
           </div>
