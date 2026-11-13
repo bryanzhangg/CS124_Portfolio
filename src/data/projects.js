@@ -21,7 +21,7 @@ const projects = [
     order: 1,
     title: "FSAE EV DASH PCB",
     caption: "Currently designing the 6-layer high speed 2027 custom Dash PCB for our FSAE EV team.",
-    image: null,
+    image: "/assets/projects/dash_pcb_v1.png",
     gallery: [],
     description: "Currently designing the 6-layer high speed 2027 custom Dash PCB for our FSAE EV team. This project is in progress. Please check back later for more updates!",
     tags: ["Schematic Capture", "PCB Layout", "Altium Designer"],
