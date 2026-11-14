@@ -120,7 +120,7 @@
   display: grid;
   place-items: center;
   box-sizing: border-box;
-  border: 0;
+  border: 1px solid var(--timeline-color);
   background: #eeece6;
   color: #514d46;
   cursor: pointer;
@@ -224,6 +224,7 @@
 
 .experience-card h3 {
   font-family: var(--font-title);
+  text-transform: uppercase;
   color: #191919;
   font-size: clamp(1.15rem, 1.8vw, 1.5rem);
   line-height: 1.3;

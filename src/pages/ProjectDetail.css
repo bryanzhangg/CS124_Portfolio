@@ -23,7 +23,7 @@
 .detail-page a:focus-visible, .detail-page button:focus-visible, .detail-gallery-track:focus-visible { outline: 2px solid #e2dfd8; outline-offset: 4px; }
 .detail-gallery { margin-top: 4rem; padding: 0 var(--detail-gutter); }
 .detail-gallery-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid #242424; margin-bottom: 1.5rem; }
-.detail-gallery-heading h2 { font-family: var(--font-title); color: #e0d8cc; font-size: clamp(1.6rem, 3vw, 2.5rem); letter-spacing: -0.03em; margin: 0.5rem 0 0; }
+.detail-gallery-heading h2 { font-family: var(--font-title); text-transform: uppercase; color: #e0d8cc; font-size: clamp(1.6rem, 3vw, 2.5rem); letter-spacing: -0.03em; margin: 0.5rem 0 0; }
 .detail-gallery-controls { display: flex; gap: 0.65rem; }
 .detail-gallery-controls button { font-family: var(--font-title); width: 42px; height: 42px; border: 0; background: #111; color: #e0d8cc; font-size: 1.2rem; cursor: pointer; }
 .detail-gallery-controls button:hover { border-color: #a19d96; }
