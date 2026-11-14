@@ -55,7 +55,7 @@ export default function Experience() {
         {experience.length > 3 && (
           <li className={`experience-expand-entry${expanded ? " is-expanded" : ""}`}>
             <button
-              className="experience-expand"
+              className="experience-expand bracket-button"
               aria-label={expanded ? "View less" : "View all experiences"}
               title={expanded ? "View less" : "View more"}
               aria-expanded={expanded}

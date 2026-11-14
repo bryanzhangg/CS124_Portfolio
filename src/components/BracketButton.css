@@ -1,0 +1,39 @@
+:where(.bracket-button) {
+  position: relative;
+  font-family: var(--font-title);
+}
+
+.bracket-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(currentColor, currentColor) top left / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) top left / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) top right / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) top right / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom left / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom left / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom right / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom right / 1px 8px no-repeat;
+  opacity: 0.6;
+  transform: scale(1.04, 1.08);
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+}
+
+.bracket-button:is(:hover, :focus-visible)::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bracket-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bracket-button::before {
+    transition: none;
+  }
+}

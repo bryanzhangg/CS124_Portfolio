@@ -165,7 +165,7 @@ const CSS = `
 
   /* Tile text */
   .contact-tile-label {
-    font-family: 'B612 Mono', 'Courier New', monospace;
+    font-family: var(--font-title);
     font-size: 0.65rem;
     letter-spacing: 0.22em;
     color: #505050;
@@ -174,7 +174,7 @@ const CSS = `
   }
 
   .contact-tile-value {
-    font-family: 'B612 Mono', 'Courier New', monospace;
+    font-family: var(--font-title);
     font-size: 0.8rem;
     letter-spacing: 0.08em;
     color: #191919;

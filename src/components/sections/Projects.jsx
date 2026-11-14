@@ -184,9 +184,9 @@ const CSS = `
     margin-top: 1.75rem;
     padding: 0.8rem 1.4rem;
     background: #0d0d0d;
-    border: 1px solid #484848;
+    border: 0;
     color: #e0d8cc;
-    font: inherit;
+    font-family: var(--font-title);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -260,7 +260,7 @@ export default function Projects() {
           )}
           {projects.length > 4 && (
             <button
-              className="projects-more"
+              className="projects-more bracket-button"
               aria-expanded={expanded}
               aria-controls="projects-extra"
               onClick={() => setExpanded(!expanded)}

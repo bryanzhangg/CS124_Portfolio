@@ -27,7 +27,7 @@
 .hero-slide-footer { position: absolute; bottom: 0; left: 0; right: 0; z-index: 6; }
 .hero-slide-footer-floating { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); z-index: 6; display: flex; justify-content: center; }
 .hero-slide-footer-floating { right: auto; }
-.hero-pause { position: absolute; right: 1.5rem; bottom: 1rem; z-index: 7; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid #383838; background: #050505b3; color: #a19d96; cursor: pointer; }
+.hero-pause { position: absolute; right: 1.5rem; bottom: 1rem; z-index: 7; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; background: #050505b3; color: #a19d96; cursor: pointer; }
 .hero-pause:hover { border-color: #a19d96; color: #e0d8cc; }
 .hero-pause:focus-visible { outline: 2px solid #e2dfd8; outline-offset: 4px; }
 .hero-slide-progress { position: relative; display: flex; align-items: center; gap: 0.9rem; padding: 0.65rem 0.85rem; margin: 0; isolation: isolate; }

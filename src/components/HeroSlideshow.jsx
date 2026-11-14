@@ -171,7 +171,7 @@ function ActiveHeroSlideshow({ children, introDuration = 2300 }) {
             onClick={() => select(index)} />)}
         </div>
       </div>
-      <button className="hero-pause" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play slideshow" : "Pause slideshow"} aria-pressed={paused}>
+      <button className="hero-pause bracket-button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play slideshow" : "Pause slideshow"} aria-pressed={paused}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           {paused ? <path d="M7 4v16l14-8z" /> : <path d="M6 4h4v16H6zm8 0h4v16h-4z" />}
         </svg>

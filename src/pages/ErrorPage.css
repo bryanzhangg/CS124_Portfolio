@@ -18,8 +18,8 @@
   padding: 0.8rem 1.1rem;
   color: #e0d8cc;
   background: #111;
-  border: 1px solid #484848;
-  font: inherit;
+  border: 0;
+  font-family: var(--font-title);
   font-size: 0.8rem;
   text-decoration: none;
   cursor: pointer;
