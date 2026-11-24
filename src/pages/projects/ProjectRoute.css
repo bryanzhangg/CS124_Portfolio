@@ -1,0 +1,14 @@
+/* Homepage sections fill a viewport. Project stories should grow with content.
+   Override these defaults with a page-specific class when a scene needs pinning. */
+.project-route section {
+  height: auto;
+  overflow: visible;
+}
+
+.project-page-loading {
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 8rem clamp(1.5rem, 6vw, 7rem) 4rem;
+  color: #e0d8cc;
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

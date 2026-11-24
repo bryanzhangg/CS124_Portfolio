@@ -1,0 +1,4 @@
+/* Scope future styles under .fsae-dashboard-page so they cannot affect other
+   projects or the homepage. This file stays empty until the custom layout exists.
+   Use var(--font-title) plus text-transform: uppercase for Orbitron headings.
+   For full-height scenes, subtract the actual navbar height from the viewport. */

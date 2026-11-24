@@ -3,6 +3,9 @@ import experience from "../../data/experience";
 import ExpandableContent from "../ExpandableContent";
 import "./Experience.css";
 
+const visibleExperience = experience.filter(entry => entry.status !== "past");
+const pastExperience = experience.filter(entry => entry.status === "past");
+
 export default function Experience() {
   const [expanded, setExpanded] = useState(false);
   const renderEntry = ({ id, period, role, organization, logo, description, highlights = [], tags = [] }, index) => (
@@ -42,22 +45,22 @@ export default function Experience() {
       </div>
 
       <ol className="experience-timeline" id="experience-timeline">
-        {experience.slice(0, 3).map(renderEntry)}
-        {experience.length > 3 && (
+        {visibleExperience.map(renderEntry)}
+        {pastExperience.length > 0 && (
           <li className="experience-more-entry">
             <ExpandableContent expanded={expanded} id="experience-extra">
-              <ol className="experience-extra-list" start={4}>
-                {experience.slice(3).map((entry, index) => renderEntry(entry, index + 3))}
+              <ol className="experience-extra-list" start={visibleExperience.length + 1}>
+                {pastExperience.map((entry, index) => renderEntry(entry, index + visibleExperience.length))}
               </ol>
             </ExpandableContent>
           </li>
         )}
-        {experience.length > 3 && (
+        {pastExperience.length > 0 && (
           <li className={`experience-expand-entry${expanded ? " is-expanded" : ""}`}>
             <button
               className="experience-expand"
-              aria-label={expanded ? "View less" : "View all experiences"}
-              title={expanded ? "View less" : "View more"}
+              aria-label={expanded ? "Hide past roles" : "Show past roles"}
+              title={expanded ? "Show less" : "Show more"}
               aria-expanded={expanded}
               aria-controls="experience-extra"
               onClick={() => setExpanded(value => !value)}

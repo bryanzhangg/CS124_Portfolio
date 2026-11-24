@@ -2,9 +2,12 @@
 // Add or remove entries freely; the timeline grows with the content.
 // Put logo files in public/assets/experience/ and set logo to "/assets/experience/filename.png".
 // Leave logo empty to show the bordered square without an image.
+// status: "upcoming" or "current" shows by default; "past" goes under Show more.
+// Update status when a role starts or ends. Array order is preserved within each group.
 const experience = [
   {
     id: "incoming-experience",
+    status: "upcoming",
     period: "May 2027 — Aug. 2027",
     role: "Incoming Field Applications Engineering Intern",
     organization: "Texas Instruments",
@@ -12,6 +15,7 @@ const experience = [
   },
   {
     id: "experience-1",
+    status: "current",
     period: "Aug. 2026 — Present",
     role: "Circuit Design and Software Engineer",
     organization: "Illini Electric Motorsports",
@@ -22,16 +26,18 @@ const experience = [
   },
   {
     id: "experience-2",
+    status: "past",
     period: "Aug. 2025 — Aug. 2026",
     role: "Airframe Avionics Engineer",
     organization: "Liquid Rocketry at Illinois",
     logo: "/assets/experience/LRI_transparent.avif",
     description: "Contributed end-to-end to the avionics and controls  of our first active roll-controlled rocket, Control Freak.",
-    highlights: ["Co-developed an embedded driver for a Triple Modular Redundant BMP390 barometer architecture through SPI and STM32", "Designed the avionics bay, owning the battery bay, constrainer, and TeleMega enclosure. Flight validated to 9g axial acceleration"],
+    highlights: ["Co-developed an embedded driver for a Triple Modular Redundant BMP390 barometer architecture through SPI and STM32", "Designed the avionics bay, owning the battery bay, constrainer, and TeleMega enclosure. Flight validated to 9 g axial acceleration"],
     tags: ["KiCAD", "Siemens NX", "STM32", "CLion", "Soldering"],
   },
   {
     id: "experience-3",
+    status: "current",
     period: "Feb. 2026 — Present",
     role: "Technical Consultant",
     organization: "CUBE Consulting",

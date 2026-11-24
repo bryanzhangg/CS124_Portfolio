@@ -5,13 +5,11 @@
   --experience-cut: clamp(32px, 6vw, 88px);
   --timeline-logo-size: 48px;
   height: auto;
-  min-height: 100dvh;
   overflow: visible;
   padding: 3rem 9rem 2.5rem;
   scroll-margin-top: 49px;
   isolation: isolate;
   z-index: 1;
-  padding-bottom: max(2.5rem, var(--experience-cut));
 }
 
 /* Extend the light background down into Projects with a 45-degree tip. */
@@ -275,7 +273,7 @@
 
 @media (max-width: 768px) {
   .experience-expand-entry { position: relative; height: calc(var(--timeline-logo-size) + 24px); margin-top: 1.5rem; }
-  .experience-section { padding: 2.5rem 1.5rem max(2.5rem, var(--experience-cut)); min-height: auto; }
+  .experience-section { padding: 2.5rem 1.5rem; }
   .experience-header { margin-bottom: 2rem; }
   .experience-entry { padding-left: 0; }
   .experience-date { min-height: var(--timeline-logo-size); margin-left: 4.25rem; align-items: center; margin-bottom: 1rem; }

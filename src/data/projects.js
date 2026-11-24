@@ -4,6 +4,8 @@
 // image is the header; an empty gallery displays the header image as a fallback.
 // Give each project a unique integer order: 1 appears first, then 2, etc.
 // The array's written order does not affect the website's card order.
+// Custom layouts are registered by slug in src/pages/projects/customProjectPages.js.
+// Keep shared metadata here; put custom stories and interactions in page components.
 const projects = [
   {
     slug: "project-a220",
