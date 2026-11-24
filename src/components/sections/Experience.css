@@ -6,7 +6,8 @@
   --timeline-logo-size: 48px;
   height: auto;
   overflow: visible;
-  padding: 3rem 9rem 2.5rem;
+  /* Bottom spacing matches top padding plus the heading's 0.6rem top margin. */
+  padding: 3rem 9rem 3.6rem;
   scroll-margin-top: 49px;
   isolation: isolate;
   z-index: 1;
@@ -273,7 +274,7 @@
 
 @media (max-width: 768px) {
   .experience-expand-entry { position: relative; height: calc(var(--timeline-logo-size) + 24px); margin-top: 1.5rem; }
-  .experience-section { padding: 2.5rem 1.5rem; }
+  .experience-section { padding: 2.5rem 1.5rem 3.1rem; }
   .experience-header { margin-bottom: 2rem; }
   .experience-entry { padding-left: 0; }
   .experience-date { min-height: var(--timeline-logo-size); margin-left: 4.25rem; align-items: center; margin-bottom: 1rem; }
